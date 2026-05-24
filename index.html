@@ -7,22 +7,46 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        .bg-viking-black { background-color: #000000; }
-        .bg-brand-orange { background-color: #F97316; }
-        .text-brand-orange { color: #F97316; }
-        
-        /* Limpiar estilos nativos de input numérico */
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-        
-        /* Animaciones UI/UX */
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .animate-fade-in { animation: fadeIn 0.25s ease-out forwards; }
-        .animate-slide-up { animation: slideUp 0.3s ease-out forwards; }
-    </style>
+   <style>
+  /* Barra superior tipo hero como en la referencia */
+  nav {
+    background: #000000;
+  }
+
+  /* Botón principal nav derecha */
+  .btn-ordenar-ahora {
+    background: #ff7a00;
+    color: #fff;
+    font-weight: 900;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    transition: transform 0.15s ease-out, box-shadow 0.15s ease-out, background 0.15s;
+  }
+  .btn-ordenar-ahora:hover {
+    background: #ff9500;
+    transform: translateY(-1px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.65);
+  }
+
+  .pill-phone {
+    background: rgba(0,0,0,0.6);
+    border-radius: 9999px;
+    padding: 0.4rem 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+</style>
+
 </head>
 <body class="bg-viking-black text-white antialiased min-h-screen flex flex-col relative">
 
@@ -513,6 +537,74 @@
             window.location.reload(); 
         }
     </script>
-    
+    <script>
+  (function () {
+    function enhanceNav() {
+      const nav = document.querySelector('nav');
+      if (!nav) return;
+
+      // Contenedor derecha del nav (reemplaza los "..." invisibles que tienes)
+      const right = nav.querySelector('.hidden.md\\:flex.space-x-8.font-semibold.text-sm.tracking-wide');
+      if (!right) return;
+
+      // Limpiar su contenido actual (los "...")
+      right.innerHTML = '';
+
+      // Menú principal (INICIO, MENÚ, PROMOCIONES, NOSOTROS, CONTACTO)
+      const menuItems = [
+        { href: '#inicio', label: 'INICIO' },
+        { href: '#menu', label: 'MENÚ' },
+        { href: '#promociones', label: 'PROMOCIONES' },
+        { href: '#nosotros', label: 'NOSOTROS' },
+        { href: '#contacto', label: 'CONTACTO' }
+      ];
+
+      const menuContainer = document.createElement('div');
+      menuContainer.className = 'flex space-x-6 text-sm font-semibold';
+
+      menuItems.forEach(item => {
+        const a = document.createElement('a');
+        a.href = item.href;
+        a.textContent = item.label;
+        a.className = 'hover:text-[#F97316] transition-colors';
+        menuContainer.appendChild(a);
+      });
+
+      // Bloque teléfono + botón
+      const actionContainer = document.createElement('div');
+      actionContainer.className = 'flex items-center space-x-4 ml-6';
+
+      const phone = document.createElement('div');
+      phone.className = 'pill-phone text-xs text-white';
+      phone.innerHTML = `
+        <span class="uppercase text-[10px] tracking-widest text-zinc-300">Pídelo ahora</span>
+        <span class="font-black text-sm text-white">300 316 35 21</span>
+      `;
+
+      const btn = document.createElement('button');
+      btn.className = 'btn-ordenar-ahora';
+      btn.innerHTML = `
+        <span>Sabor vikingo</span>
+        <i class="fa-solid fa-arrow-right-long text-xs"></i>
+      `;
+      btn.onclick = function () {
+        document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+      };
+
+      actionContainer.appendChild(phone);
+      actionContainer.appendChild(btn);
+
+      // Insertar en el nav derecho
+      right.appendChild(menuContainer);
+      right.appendChild(actionContainer);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', enhanceNav);
+    } else {
+      enhanceNav();
+    }
+  })();
+</script>
 </body>
 </html>
