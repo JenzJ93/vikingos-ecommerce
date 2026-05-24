@@ -12,12 +12,15 @@
         .bg-viking-black { background-color: #000000; }
         .bg-brand-orange { background-color: #F97316; }
         .text-brand-orange { color: #F97316; }
-        .border-brand-orange { border-color: #F97316; }
         
-        /* Animaciones para las ventanas */
+        /* Ocultar flechas en input number */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        
+        /* Animaciones */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
+        .animate-fade-in { animation: fadeIn 0.2s ease-out forwards; }
         .animate-slide-up { animation: slideUp 0.3s ease-out forwards; }
     </style>
 </head>
@@ -55,7 +58,7 @@
         <div class="max-w-4xl mx-auto text-center space-y-6">
             <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-tight">LAS MEJORES PIZZAS Y COMIDAS <br><span class="text-brand-orange">DE SOACHA COMPARTIR</span></h1>
             <p class="text-zinc-400 max-w-xl mx-auto text-sm md:text-base font-medium">Ingredientes frescos, sabor único y la mejor atención. Haz tu pedido en línea.</p>
-            <button onclick="document.getElementById('menu').scrollIntoView({behavior: 'smooth'})" class="bg-brand-orange text-white text-sm font-black uppercase px-6 py-3 rounded shadow-lg hover:bg-orange-600 transition-all">VER CATÁLOGO</button>
+            <button onclick="document.getElementById('menu').scrollIntoView({behavior: 'smooth'})" class="bg-brand-orange text-white text-sm font-black uppercase px-8 py-3.5 rounded shadow-lg hover:bg-orange-600 transition-all tracking-wide">VER CATÁLOGO</button>
         </div>
     </header>
 
@@ -64,44 +67,44 @@
             <h2 class="text-3xl font-black tracking-tight uppercase">NUESTRO <span class="text-brand-orange">MENÚ</span></h2>
         </div>
 
-        <div class="flex flex-wrap justify-center gap-4 text-sm font-semibold text-zinc-300" id="filter-buttons">
-            <button onclick="filterMenu('all', this)" class="filter-btn active bg-brand-orange text-white px-4 py-2 rounded">TODO</button>
-            <button onclick="filterMenu('pizza', this)" class="filter-btn bg-zinc-900 border border-zinc-800 px-4 py-2 rounded hover:border-[#F97316]">PIZZAS</button>
-            <button onclick="filterMenu('hamburguesa', this)" class="filter-btn bg-zinc-900 border border-zinc-800 px-4 py-2 rounded hover:border-[#F97316]">HAMBURGUESAS</button>
-            <button onclick="filterMenu('bebida', this)" class="filter-btn bg-zinc-900 border border-zinc-800 px-4 py-2 rounded hover:border-[#F97316]">BEBIDAS</button>
+        <div class="flex flex-wrap justify-center gap-3 text-sm font-bold text-zinc-300" id="filter-buttons">
+            <button onclick="filterMenu('all', this)" class="filter-btn active bg-brand-orange text-white px-6 py-2 rounded-md transition-colors">TODO</button>
+            <button onclick="filterMenu('pizza', this)" class="filter-btn bg-zinc-900 border border-zinc-800 px-6 py-2 rounded-md hover:border-[#F97316] transition-colors">PIZZAS</button>
+            <button onclick="filterMenu('hamburguesa', this)" class="filter-btn bg-zinc-900 border border-zinc-800 px-6 py-2 rounded-md hover:border-[#F97316] transition-colors">HAMBURGUESAS</button>
+            <button onclick="filterMenu('bebida', this)" class="filter-btn bg-zinc-900 border border-zinc-800 px-6 py-2 rounded-md hover:border-[#F97316] transition-colors">BEBIDAS</button>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="product-grid">
-            <div class="product-card pizza bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[#F97316] transition-all flex flex-col items-center text-center p-6 group">
+            <div class="product-card pizza bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[#F97316] transition-all flex flex-col items-center text-center p-5 group">
                 <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=200&q=80" class="w-32 h-32 rounded-full object-cover mb-4 group-hover:scale-110 transition-transform">
                 <h3 class="font-black text-lg uppercase">Pizza Pepperoni</h3>
                 <p class="text-xs text-zinc-400 mt-2 mb-4 h-12">Pepperoni, queso mozzarella y salsa de la casa.</p>
                 <span class="text-xl font-black text-brand-orange mb-4">$ 28.900</span>
-                <button onclick="openDetailModal('Pizza Pepperoni', 28900, 'https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=400&q=80', 'Pepperoni, queso mozzarella y salsa de la casa.')" class="w-full bg-brand-orange text-white text-xs font-bold py-2 rounded mt-auto">VER DETALLE</button>
+                <button onclick="openDetailModal('Pizza Pepperoni', 28900, 'https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=400&q=80', 'Pepperoni, queso mozzarella y salsa de la casa.')" class="w-full bg-brand-orange text-white text-sm font-black py-2.5 rounded-md mt-auto hover:bg-orange-600 transition-colors">AÑADIR</button>
             </div>
             
-            <div class="product-card pizza bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[#F97316] transition-all flex flex-col items-center text-center p-6 group">
+            <div class="product-card pizza bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[#F97316] transition-all flex flex-col items-center text-center p-5 group">
                 <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=200&q=80" class="w-32 h-32 rounded-full object-cover mb-4 group-hover:scale-110 transition-transform">
                 <h3 class="font-black text-lg uppercase">Pizza Vikinga</h3>
                 <p class="text-xs text-zinc-400 mt-2 mb-4 h-12">Pepperoni, jamón, chorizo, carne, queso y salsa.</p>
                 <span class="text-xl font-black text-brand-orange mb-4">$ 32.900</span>
-                <button onclick="openDetailModal('Pizza Vikinga', 32900, 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=400&q=80', 'Pepperoni, jamón, chorizo, carne, queso y salsa.')" class="w-full bg-brand-orange text-white text-xs font-bold py-2 rounded mt-auto">VER DETALLE</button>
+                <button onclick="openDetailModal('Pizza Vikinga', 32900, 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=400&q=80', 'Pepperoni, jamón, chorizo, carne, queso y salsa.')" class="w-full bg-brand-orange text-white text-sm font-black py-2.5 rounded-md mt-auto hover:bg-orange-600 transition-colors">AÑADIR</button>
             </div>
 
-            <div class="product-card hamburguesa bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[#F97316] transition-all flex flex-col items-center text-center p-6 group">
+            <div class="product-card hamburguesa bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[#F97316] transition-all flex flex-col items-center text-center p-5 group">
                 <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=200&q=80" class="w-32 h-32 rounded-full object-cover mb-4 group-hover:scale-110 transition-transform">
                 <h3 class="font-black text-lg uppercase">Burger Vikinga</h3>
                 <p class="text-xs text-zinc-400 mt-2 mb-4 h-12">Doble carne, queso cheddar, tocineta, aros de cebolla.</p>
                 <span class="text-xl font-black text-brand-orange mb-4">$ 25.000</span>
-                <button onclick="openDetailModal('Burger Vikinga', 25000, 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=400&q=80', 'Doble carne, queso cheddar, tocineta, aros de cebolla.')" class="w-full bg-brand-orange text-white text-xs font-bold py-2 rounded mt-auto">VER DETALLE</button>
+                <button onclick="openDetailModal('Burger Vikinga', 25000, 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=400&q=80', 'Doble carne, queso cheddar, tocineta, aros de cebolla.')" class="w-full bg-brand-orange text-white text-sm font-black py-2.5 rounded-md mt-auto hover:bg-orange-600 transition-colors">AÑADIR</button>
             </div>
 
-            <div class="product-card bebida bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[#F97316] transition-all flex flex-col items-center text-center p-6 group">
+            <div class="product-card bebida bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[#F97316] transition-all flex flex-col items-center text-center p-5 group">
                 <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=200&q=80" class="w-32 h-32 rounded-full object-cover mb-4 group-hover:scale-110 transition-transform">
                 <h3 class="font-black text-lg uppercase">Gaseosa 1.5L</h3>
                 <p class="text-xs text-zinc-400 mt-2 mb-4 h-12">Coca-Cola, Colombiana, Manzana.</p>
                 <span class="text-xl font-black text-brand-orange mb-4">$ 8.000</span>
-                <button onclick="openDetailModal('Gaseosa 1.5L', 8000, 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=400&q=80', 'Coca-Cola, Colombiana, Manzana.')" class="w-full bg-brand-orange text-white text-xs font-bold py-2 rounded mt-auto">VER DETALLE</button>
+                <button onclick="openDetailModal('Gaseosa 1.5L', 8000, 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=400&q=80', 'Coca-Cola, Colombiana, Manzana.')" class="w-full bg-brand-orange text-white text-sm font-black py-2.5 rounded-md mt-auto hover:bg-orange-600 transition-colors">AÑADIR</button>
             </div>
         </div>
     </main>
@@ -109,7 +112,7 @@
     <footer class="bg-zinc-950 border-t border-zinc-800 py-6 mt-auto">
         <div class="max-w-7xl mx-auto px-6 text-center text-zinc-500 text-sm">
             <p><strong>Horarios:</strong> Lunes a Domingo de 11:00 AM a 11:00 PM</p>
-            <p class="mt-2">© 2026 Vikingos Pizza - Proyecto Universitario</p>
+            <p class="mt-2">© 2026 Vikingos Pizza</p>
         </div>
     </footer>
 
@@ -118,25 +121,22 @@
             <h3 class="font-black text-lg uppercase tracking-tight"><i class="fa-solid fa-basket-shopping text-brand-orange mr-2"></i> Tu Pedido</h3>
             <button onclick="toggleCart()" class="text-zinc-400 hover:text-white p-2 text-xl">&times;</button>
         </div>
-        
-        <div id="cart-items" class="p-6 overflow-y-auto flex-1 space-y-4">
-            <p id="empty-message" class="text-zinc-500 text-sm text-center py-8">Tu carrito está vacío.</p>
-        </div>
-
+        <div id="cart-items" class="p-6 overflow-y-auto flex-1 space-y-4"></div>
         <div class="p-6 border-t border-zinc-800 bg-zinc-900 space-y-2 text-sm font-semibold">
             <div class="flex justify-between text-zinc-400"><span>Subtotal:</span> <span id="cart-subtotal">$ 0</span></div>
             <div class="flex justify-between text-zinc-400"><span>Domicilio:</span> <span>$ 2.500</span></div>
             <div class="flex justify-between font-black text-xl border-t border-zinc-800 pt-3 mt-2">
                 <span>Total:</span> <span id="cart-total" class="text-brand-orange">$ 0</span>
             </div>
-            <button onclick="openCheckoutModal()" id="btn-checkout" class="w-full bg-brand-orange text-white font-black py-3 mt-4 rounded uppercase tracking-wide text-sm opacity-50 cursor-not-allowed" disabled>Proceder al Checkout</button>
+            <button onclick="openCheckoutModal()" id="btn-checkout" class="w-full bg-brand-orange text-white font-black py-3 mt-4 rounded-md uppercase tracking-wide text-sm opacity-50 cursor-not-allowed" disabled>Proceder al Checkout</button>
         </div>
     </div>
 
     <div id="detail-modal" class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center p-4 animate-fade-in">
         <div class="bg-zinc-900 border border-zinc-700 rounded-xl max-w-md w-full overflow-hidden flex flex-col animate-slide-up relative">
-            <button onclick="closeDetailModal()" class="absolute top-2 right-2 bg-black/50 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-brand-orange z-10">&times;</button>
+            <button onclick="closeDetailModal()" class="absolute top-2 right-2 bg-black/70 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-brand-orange z-10">&times;</button>
             <img id="detail-img" src="" class="w-full h-48 object-cover">
+            
             <div class="p-6 space-y-4">
                 <div>
                     <h3 id="detail-title" class="font-black text-2xl uppercase">Nombre</h3>
@@ -144,23 +144,39 @@
                 </div>
                 
                 <div class="border-t border-zinc-800 pt-4">
-                    <p class="font-bold text-sm mb-2 text-brand-orange">Personalizar Ingredientes:</p>
-                    <label class="flex items-center space-x-2 text-sm text-zinc-300 mb-2 cursor-pointer">
-                        <input type="checkbox" class="accent-[#F97316]" value="Sin cebolla"> <span>Sin Cebolla</span>
-                    </label>
-                    <label class="flex items-center space-x-2 text-sm text-zinc-300 cursor-pointer">
-                        <input type="checkbox" class="accent-[#F97316]" value="Extra Queso (+$3.000)"> <span>Adición de Queso (+$3.000)</span>
-                    </label>
+                    <p class="font-bold text-sm mb-3 text-white">Tamaño y Extras</p>
+                    <div class="space-y-2">
+                        <label class="flex justify-between items-center text-sm text-zinc-300 cursor-pointer bg-zinc-950 p-2 rounded border border-zinc-800 hover:border-[#F97316]">
+                            <div class="flex items-center space-x-2">
+                                <input type="radio" name="size" class="accent-[#F97316]" value="Mediana" checked onchange="updateModalPrice()"> <span>Mediana</span>
+                            </div>
+                            <span>Base</span>
+                        </label>
+                        <label class="flex justify-between items-center text-sm text-zinc-300 cursor-pointer bg-zinc-950 p-2 rounded border border-zinc-800 hover:border-[#F97316]">
+                            <div class="flex items-center space-x-2">
+                                <input type="radio" name="size" class="accent-[#F97316]" value="Familiar" onchange="updateModalPrice()"> <span>Familiar</span>
+                            </div>
+                            <span class="text-brand-orange">+$ 7.000</span>
+                        </label>
+                        <label class="flex justify-between items-center text-sm text-zinc-300 cursor-pointer bg-zinc-950 p-2 rounded border border-zinc-800 mt-2">
+                            <div class="flex items-center space-x-2">
+                                <input type="checkbox" id="extra-cheese" class="accent-[#F97316]" value="Extra Queso" onchange="updateModalPrice()"> <span>Extra Queso</span>
+                            </div>
+                            <span class="text-brand-orange">+$ 3.000</span>
+                        </label>
+                    </div>
                 </div>
 
-                <div class="border-t border-zinc-800 pt-4">
-                    <p class="font-bold text-sm mb-2 text-brand-orange">Notas especiales:</p>
-                    <textarea id="detail-notes" placeholder="Ej. Por favor, enviar la salsa aparte..." class="w-full bg-zinc-950 border border-zinc-700 rounded p-2 text-sm text-white focus:outline-none focus:border-brand-orange resize-none h-16"></textarea>
-                </div>
-
-                <div class="flex items-center justify-between pt-2">
-                    <span id="detail-price" class="text-2xl font-black text-brand-orange">$ 0</span>
-                    <button id="btn-add-detail" class="bg-brand-orange text-white text-sm font-bold px-6 py-2 rounded">AGREGAR</button>
+                <div class="border-t border-zinc-800 pt-4 flex space-x-3">
+                    <div class="flex items-center justify-between bg-zinc-950 border border-zinc-700 rounded-md px-3 w-28">
+                        <button onclick="changeModalQty(-1)" class="text-zinc-400 hover:text-brand-orange text-xl font-bold px-1">-</button>
+                        <span id="modal-qty" class="font-bold text-lg">1</span>
+                        <button onclick="changeModalQty(1)" class="text-zinc-400 hover:text-brand-orange text-xl font-bold px-1">+</button>
+                    </div>
+                    <button id="btn-add-detail" class="flex-1 bg-brand-orange text-white text-sm font-black py-3.5 rounded-md flex justify-between px-4 items-center hover:bg-orange-600 transition-all shadow-lg">
+                        <span>AÑADIR AL CARRITO</span>
+                        <span id="modal-total-price">$ 0</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -171,40 +187,21 @@
             <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-zinc-400 hover:text-white text-xl">&times;</button>
             <h3 class="font-black text-xl uppercase mb-1"><i class="fa-solid fa-truck-fast text-brand-orange mr-2"></i> Datos de Entrega</h3>
             <p class="text-xs text-zinc-400 mb-6">Completa tus datos para enviar tu pedido a Soacha Compartir.</p>
-
             <form onsubmit="confirmOrder(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-bold text-zinc-400 mb-1">Nombre Completo</label>
-                    <input type="text" required class="w-full bg-zinc-950 border border-zinc-700 rounded p-2.5 text-sm text-white focus:outline-none focus:border-brand-orange">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-zinc-400 mb-1">Dirección Exacta</label>
-                    <input type="text" required placeholder="Ej. Calle 12 # 34-56" class="w-full bg-zinc-950 border border-zinc-700 rounded p-2.5 text-sm text-white focus:outline-none focus:border-brand-orange">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-zinc-400 mb-1">Método de Pago</label>
-                    <select required class="w-full bg-zinc-950 border border-zinc-700 rounded p-2.5 text-sm text-white focus:outline-none focus:border-brand-orange">
-                        <option value="">Selecciona un método...</option>
-                        <option value="efectivo">Efectivo contra entrega</option>
-                        <option value="tarjeta">Tarjeta (Datáfono)</option>
-                        <option value="nequi">Transferencia Nequi / Daviplata</option>
-                    </select>
-                </div>
-                <div class="pt-4 border-t border-zinc-800">
-                    <button type="submit" class="w-full bg-brand-orange text-white font-black py-3 rounded uppercase tracking-wide text-sm">Confirmar Pedido</button>
-                </div>
+                <div><label class="block text-xs font-bold text-zinc-400 mb-1">Nombre Completo</label><input type="text" required class="w-full bg-zinc-950 border border-zinc-700 rounded p-2.5 text-sm text-white focus:outline-none focus:border-brand-orange"></div>
+                <div><label class="block text-xs font-bold text-zinc-400 mb-1">Dirección Exacta</label><input type="text" required class="w-full bg-zinc-950 border border-zinc-700 rounded p-2.5 text-sm text-white focus:outline-none focus:border-brand-orange"></div>
+                <div><label class="block text-xs font-bold text-zinc-400 mb-1">Método de Pago</label><select required class="w-full bg-zinc-950 border border-zinc-700 rounded p-2.5 text-sm text-white focus:outline-none focus:border-brand-orange"><option value="">Selecciona...</option><option value="efectivo">Efectivo</option><option value="nequi">Nequi</option></select></div>
+                <div class="pt-4 border-t border-zinc-800"><button type="submit" class="w-full bg-brand-orange text-white font-black py-3 rounded-md uppercase tracking-wide text-sm">Confirmar Pedido</button></div>
             </form>
         </div>
     </div>
 
     <div id="success-modal" class="fixed inset-0 bg-black/95 z-[70] hidden items-center justify-center p-4">
         <div class="text-center space-y-4 animate-slide-up">
-            <div class="w-24 h-24 bg-[#F97316] rounded-full flex items-center justify-center mx-auto mb-6">
-                <i class="fa-solid fa-check text-5xl text-white"></i>
-            </div>
+            <div class="w-24 h-24 bg-[#F97316] rounded-full flex items-center justify-center mx-auto mb-6"><i class="fa-solid fa-check text-5xl text-white"></i></div>
             <h2 class="text-4xl font-black uppercase text-white tracking-tight">¡PEDIDO CONFIRMADO!</h2>
-            <p class="text-zinc-300 text-lg">Tus vikingos están preparando tu orden.<br>Llegará en aproximadamente 35 minutos.</p>
-            <button onclick="finishProcess()" class="bg-white text-black font-black uppercase px-12 py-4 rounded mt-8 hover:bg-zinc-200 transition-colors tracking-wide">VOLVER</button>
+            <p class="text-zinc-300 text-lg">Tus vikingos están preparando tu orden.</p>
+            <button onclick="finishProcess()" class="bg-white text-black font-black uppercase px-12 py-4 rounded-md mt-8 hover:bg-zinc-200 transition-colors tracking-wide">VOLVER</button>
         </div>
     </div>
 
@@ -212,33 +209,120 @@
         let cart = [];
         const deliveryFee = 2500;
         let currentProduct = {};
+        let modalQuantity = 1; // Variable para controlar cantidad en el modal
 
         function filterMenu(category, btn) {
-            document.querySelectorAll('.filter-btn').forEach(b => {
-                b.classList.remove('bg-brand-orange', 'text-white');
-                b.classList.add('bg-zinc-900', 'text-zinc-300');
-            });
-            btn.classList.remove('bg-zinc-900', 'text-zinc-300');
-            btn.classList.add('bg-brand-orange', 'text-white');
-
-            const cards = document.querySelectorAll('.product-card');
-            cards.forEach(card => {
-                if (category === 'all' || card.classList.contains(category)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+            document.querySelectorAll('.filter-btn').forEach(b => { b.classList.remove('bg-brand-orange', 'text-white'); b.classList.add('bg-zinc-900', 'text-zinc-300'); });
+            btn.classList.remove('bg-zinc-900', 'text-zinc-300'); btn.classList.add('bg-brand-orange', 'text-white');
+            document.querySelectorAll('.product-card').forEach(card => { card.style.display = (category === 'all' || card.classList.contains(category)) ? 'flex' : 'none'; });
         }
 
+        /* Funciones del Modal Mejorado */
         function openDetailModal(name, price, img, desc) {
-            currentProduct = { name, price, basePrice: price };
+            currentProduct = { name, basePrice: price };
+            modalQuantity = 1; // Resetear cantidad
+            
             document.getElementById('detail-title').innerText = name;
             document.getElementById('detail-desc').innerText = desc;
-            document.getElementById('detail-price').innerText = `$ ${price.toLocaleString('es-CO')}`;
             document.getElementById('detail-img').src = img;
             
-            document.getElementById('detail-notes').value = '';
-            document.querySelectorAll('#detail-modal input[type="checkbox"]').forEach(cb => cb.checked
-</html>
+            // Resetear inputs
+            document.getElementById('extra-cheese').checked = false;
+            document.querySelector('input[name="size"][value="Mediana"]').checked = true;
+            
+            updateModalPrice(); // Calcula el precio inicial mostrado en el botón ancho
+            document.getElementById('detail-modal').style.display = 'flex';
 
+            // Configurar la acción de añadir al carrito
+            document.getElementById('btn-add-detail').onclick = () => {
+                let finalPrice = currentProduct.basePrice;
+                let size = document.querySelector('input[name="size"]:checked').value;
+                let extraCheese = document.getElementById('extra-cheese').checked;
+                
+                if (size === 'Familiar') finalPrice += 7000;
+                if (extraCheese) finalPrice += 3000;
+
+                let notes = `Tamaño: ${size}` + (extraCheese ? ' | Extra Queso' : '');
+                
+                // Añadir la cantidad seleccionada
+                addToCart(name, finalPrice, notes, modalQuantity);
+                closeDetailModal();
+            };
+        }
+
+        function changeModalQty(amount) {
+            modalQuantity += amount;
+            if (modalQuantity < 1) modalQuantity = 1;
+            updateModalPrice();
+        }
+
+        function updateModalPrice() {
+            let tempPrice = currentProduct.basePrice;
+            let size = document.querySelector('input[name="size"]:checked').value;
+            let extraCheese = document.getElementById('extra-cheese').checked;
+            
+            if (size === 'Familiar') tempPrice += 7000;
+            if (extraCheese) tempPrice += 3000;
+
+            let total = tempPrice * modalQuantity;
+            
+            document.getElementById('modal-qty').innerText = modalQuantity;
+            document.getElementById('modal-total-price').innerText = `$ ${total.toLocaleString('es-CO')}`;
+        }
+
+        function closeDetailModal() { document.getElementById('detail-modal').style.display = 'none'; }
+        function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('translate-x-full'); }
+
+        function addToCart(name, price, notes, qty = 1) {
+            const existingItem = cart.find(item => item.name === name && item.notes === notes);
+            if (existingItem) existingItem.quantity += qty;
+            else cart.push({ name, price, notes, quantity: qty });
+            
+            updateCartUI();
+            if (document.getElementById('cart-sidebar').classList.contains('translate-x-full')) toggleCart();
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items');
+            document.getElementById('cart-count').innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const btnCheckout = document.getElementById('btn-checkout');
+
+            if (cart.length === 0) {
+                container.innerHTML = '<p class="text-zinc-500 text-sm text-center py-8">Tu carrito está vacío.</p>';
+                document.getElementById('cart-subtotal').innerText = "$ 0"; document.getElementById('cart-total').innerText = "$ 0";
+                btnCheckout.disabled = true; btnCheckout.classList.add('opacity-50', 'cursor-not-allowed');
+                return;
+            }
+
+            btnCheckout.disabled = false; btnCheckout.classList.remove('opacity-50', 'cursor-not-allowed');
+            container.innerHTML = '';
+            let subtotal = 0;
+            
+            cart.forEach((item, index) => {
+                subtotal += item.price * item.quantity;
+                container.innerHTML += `
+                    <div class="cart-row flex justify-between items-center bg-black border border-zinc-800 p-3 rounded-lg">
+                        <div class="flex-1 mr-2">
+                            <h4 class="font-bold text-sm truncate max-w-[150px] leading-tight">${item.name}</h4>
+                            ${item.notes ? `<p class="text-[10px] text-zinc-500 leading-tight mt-1 line-clamp-2">${item.notes}</p>` : ''}
+                            <p class="text-xs text-brand-orange font-bold mt-1">$${item.price.toLocaleString('es-CO')}</p>
+                        </div>
+                        <div class="flex items-center space-x-2 bg-zinc-900 rounded p-1 border border-zinc-800">
+                            <button onclick="changeQty(${index}, -1)" class="text-white px-2 rounded hover:text-brand-orange">-</button>
+                            <span class="text-sm font-bold w-4 text-center">${item.quantity}</span>
+                            <button onclick="changeQty(${index}, 1)" class="text-white px-2 rounded hover:text-brand-orange">+</button>
+                        </div>
+                    </div>`;
+            });
+            document.getElementById('cart-subtotal').innerText = `$ ${subtotal.toLocaleString('es-CO')}`;
+            document.getElementById('cart-total').innerText = `$ ${(subtotal + deliveryFee).toLocaleString('es-CO')}`;
+        }
+
+        function changeQty(index, amount) { cart[index].quantity += amount; if (cart[index].quantity <= 0) cart.splice(index, 1); updateCartUI(); }
+        function openCheckoutModal() { toggleCart(); document.getElementById('checkout-modal').style.display = 'flex'; }
+        function closeCheckoutModal() { document.getElementById('checkout-modal').style.display = 'none'; }
+        function confirmOrder(event) { event.preventDefault(); closeCheckoutModal(); document.getElementById('success-modal').style.display = 'flex'; }
+        function finishProcess() { window.location.reload(); }
+    </script>
+</body>
+</html>
