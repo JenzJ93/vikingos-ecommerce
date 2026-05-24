@@ -33,15 +33,12 @@
 <nav class="bg-viking-black sticky top-0 z-40 border-b border-zinc-800 px-6 py-4 flex justify-between items-center shadow-lg">
     
     <div class="flex items-center space-x-3 cursor-pointer" onclick="document.getElementById('inicio').scrollIntoView();">
-        <img src="ruta/a/tu/logo.png" alt="Logo Vikingos Pizza" class="w-10 h-10 rounded-full object-cover">
+        <!-- El logo se inyectará por JavaScript -->
         <span class="text-2xl font-black tracking-wider text-brand-orange uppercase">Vikingos Pizza</span>
     </div>
     
     <div class="hidden md:flex space-x-8 font-semibold text-sm tracking-wide">
-        <a href="#inicio" class="hover:text-[#F97316] transition-colors">INICIO</a>
-        <a href="#menu" class="hover:text-[#F97316] transition-colors">MENÚ</a>
-        <a href="#promociones" class="hover:text-[#F97316] transition-colors">PROMOCIONES</a>
-        <a href="#contacto" class="hover:text-[#F97316] transition-colors">CONTACTO</a>
+        ...
     </div>
 </nav>
 
@@ -515,5 +512,36 @@
             window.location.reload(); 
         }
     </script>
+    <script>
+  (function(){
+    // Ruta del logo dentro del repositorio
+    const logoUrl = './assets/logo.png';
+
+    function insertLogo(){
+      // Contenedor del título "Vikingos Pizza" en el nav
+      const target = document.querySelector('nav .flex.items-center');
+      if (!target) return;
+
+      // Evitar duplicar el logo si ya está inyectado
+      if (target.querySelector('img[data-injected="vikingos-logo"]')) return;
+
+      const img = document.createElement('img');
+      img.src = logoUrl;
+      img.alt = 'Logo Vikingos Pizza';
+      img.setAttribute('data-injected', 'vikingos-logo');
+      img.className = 'w-10 h-10 rounded-full object-cover mr-3';
+
+      // Insertar la imagen antes del texto "Vikingos Pizza"
+      target.insertBefore(img, target.firstChild);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', insertLogo);
+    } else {
+      insertLogo();
+    }
+  })();
+</script>
+
 </body>
 </html>
