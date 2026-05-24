@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" style="scroll-behavior: smooth;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,14 +31,19 @@
     </div>
 
     <nav class="bg-viking-black sticky top-0 z-40 border-b border-zinc-800 px-6 py-4 flex justify-between items-center shadow-lg">
-        <div class="flex items-center space-x-2">
-            <span class="text-2xl font-black tracking-wider text-brand-orange">VIKINGOS</span>
+        <div class="flex items-center space-x-3 cursor-pointer" onclick="document.getElementById('inicio').scrollIntoView();">
+            <img src="https://cdn-icons-png.flaticon.com/512/3132/3132693.png" alt="Logo Vikingos Pizza" class="w-10 h-10 rounded-full border border-zinc-800 object-cover bg-white">
+            <span class="text-2xl font-black tracking-wider text-brand-orange uppercase">Vikingos Pizza</span>
         </div>
+        
         <div class="hidden md:flex space-x-8 font-semibold text-sm tracking-wide">
-            <a href="#" class="text-brand-orange">INICIO</a>
+            <a href="#inicio" class="hover:text-[#F97316] transition-colors">INICIO</a>
             <a href="#menu" class="hover:text-[#F97316] transition-colors">MENÚ</a>
-            <a href="#" class="hover:text-[#F97316] transition-colors">NOSOTROS</a>
+            <a href="#promociones" class="hover:text-[#F97316] transition-colors">PROMOCIONES</a>
+            <a href="#nosotros" class="hover:text-[#F97316] transition-colors">NOSOTROS</a>
+            <a href="#contacto" class="hover:text-[#F97316] transition-colors">CONTACTO</a>
         </div>
+        
         <div class="flex items-center space-x-6">
             <div class="hidden lg:flex items-center space-x-2">
                 <i class="fa-solid fa-phone text-brand-orange text-xl"></i>
@@ -49,12 +54,12 @@
             </div>
             <button onclick="toggleCart()" class="relative p-2 bg-zinc-900 rounded-full hover:bg-zinc-800 transition-all border border-zinc-700">
                 <i class="fa-solid fa-basket-shopping text-brand-orange text-lg"></i>
-                <span id="cart-count" class="absolute -top-1 -right-1 bg-white text-black text-xs font-black w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                <span id="cart-count" class="absolute -top-1 -right-1 bg-white text-black text-xs font-black w-5 h-5 rounded-full flex items-center justify-center shadow-md">0</span>
             </button>
         </div>
     </nav>
 
-    <header class="relative py-32 px-6 border-b border-zinc-800 bg-cover bg-center bg-no-repeat" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.95) 100%), url('https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=2000&q=100');">
+    <header id="inicio" class="relative py-32 px-6 border-b border-zinc-800 bg-cover bg-center bg-no-repeat" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.95) 100%), url('https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=2000&q=100');">
         <div class="max-w-5xl mx-auto text-center space-y-6 relative z-10">
             <h1 class="text-5xl md:text-7xl font-black tracking-tight leading-tight text-white drop-shadow-2xl">
                 LAS MEJORES PIZZAS Y COMIDAS <br>
@@ -64,14 +69,14 @@
                 Ingredientes frescos, sabor único y la mejor atención. Haz tu pedido en línea.
             </p>
             <div class="pt-4">
-                <button onclick="document.getElementById('menu').scrollIntoView({behavior: 'smooth'})" class="bg-brand-orange text-white text-sm font-black uppercase px-10 py-4 rounded-md hover:bg-orange-600 transition-colors tracking-wide shadow-[0_4px_14px_0_rgba(249,115,22,0.4)]">
+                <a href="#menu" class="inline-block bg-brand-orange text-white text-sm font-black uppercase px-10 py-4 rounded-md hover:bg-orange-600 transition-colors tracking-wide shadow-[0_4px_14px_0_rgba(249,115,22,0.4)]">
                     VER CATÁLOGO
-                </button>
+                </a>
             </div>
         </div>
     </header>
 
-    <main id="menu" class="max-w-7xl mx-auto px-6 py-12 flex-1 w-full space-y-8">
+    <main id="menu" class="max-w-7xl mx-auto px-6 py-16 w-full space-y-8 scroll-mt-20">
         <div class="text-center space-y-2">
             <h2 class="text-3xl font-black tracking-tight uppercase">NUESTRO <span class="text-brand-orange">MENÚ</span></h2>
         </div>
@@ -87,7 +92,7 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="product-grid">
             
-            <div class="product-card pizza bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[#F97316] transition-all flex flex-col items-center text-center p-5 group">
+            <div class="product-card pizza bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[#F97316] transition-all flex flex-col items-center text-center p-5 group shadow-lg">
                 <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=300&q=80" class="w-32 h-32 rounded-full object-cover mb-4 group-hover:scale-110 transition-transform">
                 <h3 class="font-black text-lg uppercase">Pizza Pepperoni</h3>
                 <p class="text-xs text-zinc-400 mt-2 mb-4 h-12">Pepperoni, queso mozzarella y salsa de la casa.</p>
@@ -95,7 +100,7 @@
                 <button onclick="openDetailModal('Pizza Pepperoni', 28900, 'https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80', 'Pepperoni, queso mozzarella y salsa de la casa.')" class="w-full bg-brand-orange text-white text-sm font-black py-2.5 rounded-md mt-auto hover:bg-orange-600 transition-colors">AÑADIR</button>
             </div>
 
-            <div class="product-card pizza bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[#F97316] transition-all flex flex-col items-center text-center p-5 group">
+            <div class="product-card pizza bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[#F97316] transition-all flex flex-col items-center text-center p-5 group shadow-lg">
                 <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=300&q=80" class="w-32 h-32 rounded-full object-cover mb-4 group-hover:scale-110 transition-transform">
                 <h3 class="font-black text-lg uppercase">Pizza Hawaiana</h3>
                 <p class="text-xs text-zinc-400 mt-2 mb-4 h-12">Jamón, piña, queso mozzarella y salsa artesanal.</p>
@@ -103,15 +108,15 @@
                 <button onclick="openDetailModal('Pizza Hawaiana', 28900, 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80', 'Jamón, piña, queso mozzarella y salsa artesanal.')" class="w-full bg-brand-orange text-white text-sm font-black py-2.5 rounded-md mt-auto hover:bg-orange-600 transition-colors">AÑADIR</button>
             </div>
             
-            <div class="product-card pizza bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[#F97316] transition-all flex flex-col items-center text-center p-5 group">
+            <div class="product-card pizza bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[#F97316] transition-all flex flex-col items-center text-center p-5 group shadow-lg">
                 <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=300&q=80" class="w-32 h-32 rounded-full object-cover mb-4 group-hover:scale-110 transition-transform">
                 <h3 class="font-black text-lg uppercase">Pizza Vikinga</h3>
-                <p class="text-xs text-zinc-400 mt-2 mb-4 h-12">Pepperoni, jamón, chorizo, carne selecta, queso y salsa especial.</p>
+                <p class="text-xs text-zinc-400 mt-2 mb-4 h-12">Pepperoni, jamón, chorizo, carne selecta, queso y salsa.</p>
                 <span class="text-xl font-black text-brand-orange mb-4">$ 32.900</span>
                 <button onclick="openDetailModal('Pizza Vikinga', 32900, 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80', 'Pepperoni, jamón, chorizo, carne selecta, queso y salsa especial.')" class="w-full bg-brand-orange text-white text-sm font-black py-2.5 rounded-md mt-auto hover:bg-orange-600 transition-colors">AÑADIR</button>
             </div>
 
-            <div class="product-card pizza bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[#F97316] transition-all flex flex-col items-center text-center p-5 group">
+            <div class="product-card pizza bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[#F97316] transition-all flex flex-col items-center text-center p-5 group shadow-lg">
                 <img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=300&q=80" class="w-32 h-32 rounded-full object-cover mb-4 group-hover:scale-110 transition-transform">
                 <h3 class="font-black text-lg uppercase">Pizza Vegetariana</h3>
                 <p class="text-xs text-zinc-400 mt-2 mb-4 h-12">Pimentón, cebolla, champiñones frescos, queso y salsa.</p>
@@ -119,23 +124,23 @@
                 <button onclick="openDetailModal('Pizza Vegetariana', 27900, 'https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=600&q=80', 'Pimentón, cebolla, champiñones frescos, queso y salsa de la casa.')" class="w-full bg-brand-orange text-white text-sm font-black py-2.5 rounded-md mt-auto hover:bg-orange-600 transition-colors">AÑADIR</button>
             </div>
 
-            <div class="product-card hamburguesa bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[#F97316] transition-all flex flex-col items-center text-center p-5 group">
+            <div class="product-card hamburguesa bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[#F97316] transition-all flex flex-col items-center text-center p-5 group shadow-lg">
                 <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=300&q=80" class="w-32 h-32 rounded-full object-cover mb-4 group-hover:scale-110 transition-transform">
                 <h3 class="font-black text-lg uppercase">Burger Vikinga</h3>
-                <p class="text-xs text-zinc-400 mt-2 mb-4 h-12">Doble carne, queso cheddar, tocineta crujiente y aros de cebolla.</p>
+                <p class="text-xs text-zinc-400 mt-2 mb-4 h-12">Doble carne, queso cheddar, tocineta y aros de cebolla.</p>
                 <span class="text-xl font-black text-brand-orange mb-4">$ 25.000</span>
                 <button onclick="openDetailModal('Burger Vikinga', 25000, 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80', 'Doble carne artesanal, queso cheddar, tocineta crujiente y aros de cebolla.')" class="w-full bg-brand-orange text-white text-sm font-black py-2.5 rounded-md mt-auto hover:bg-orange-600 transition-colors">AÑADIR</button>
             </div>
 
-            <div class="product-card perros bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[#F97316] transition-all flex flex-col items-center text-center p-5 group">
+            <div class="product-card perros bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[#F97316] transition-all flex flex-col items-center text-center p-5 group shadow-lg">
                 <img src="https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&w=300&q=80" class="w-32 h-32 rounded-full object-cover mb-4 group-hover:scale-110 transition-transform">
-                <h3 class="font-black text-lg uppercase">Perro Caliente Sencillo</h3>
-                <p class="text-xs text-zinc-400 mt-2 mb-4 h-12">Salchicha americana, papa ripio, queso costeño y salsas.</p>
+                <h3 class="font-black text-lg uppercase">Perro Sencillo</h3>
+                <p class="text-xs text-zinc-400 mt-2 mb-4 h-12">Salchicha, papa ripio, queso costeño y salsas.</p>
                 <span class="text-xl font-black text-brand-orange mb-4">$ 15.000</span>
                 <button onclick="openDetailModal('Perro Caliente Sencillo', 15000, 'https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&w=600&q=80', 'Salchicha americana manguera, papa ripio, abundante queso costeño y salsas.')" class="w-full bg-brand-orange text-white text-sm font-black py-2.5 rounded-md mt-auto hover:bg-orange-600 transition-colors">AÑADIR</button>
             </div>
 
-            <div class="product-card combos bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[#F97316] transition-all flex flex-col items-center text-center p-5 group">
+            <div class="product-card combos bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[#F97316] transition-all flex flex-col items-center text-center p-5 group shadow-lg">
                 <img src="https://images.unsplash.com/photo-1594212844140-192661ab2f34?auto=format&fit=crop&w=300&q=80" class="w-32 h-32 rounded-full object-cover mb-4 group-hover:scale-110 transition-transform">
                 <h3 class="font-black text-lg uppercase">Combo Burger</h3>
                 <p class="text-xs text-zinc-400 mt-2 mb-4 h-12">Hamburguesa sencilla, papas fritas y gaseosa de 400ml.</p>
@@ -143,22 +148,95 @@
                 <button onclick="openDetailModal('Combo Hamburguesa', 28000, 'https://images.unsplash.com/photo-1594212844140-192661ab2f34?auto=format&fit=crop&w=600&q=80', 'Hamburguesa sencilla de la casa, porción de papas fritas francesas y gaseosa de 400ml.')" class="w-full bg-brand-orange text-white text-sm font-black py-2.5 rounded-md mt-auto hover:bg-orange-600 transition-colors">AÑADIR</button>
             </div>
 
-            <div class="product-card bebida bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[#F97316] transition-all flex flex-col items-center text-center p-5 group">
+            <div class="product-card bebida bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-[#F97316] transition-all flex flex-col items-center text-center p-5 group shadow-lg">
                 <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=300&q=80" class="w-32 h-32 rounded-full object-cover mb-4 group-hover:scale-110 transition-transform">
                 <h3 class="font-black text-lg uppercase">Gaseosa 1.5L</h3>
                 <p class="text-xs text-zinc-400 mt-2 mb-4 h-12">Refrescos familiares (Coca-Cola, Colombiana, Manzana).</p>
                 <span class="text-xl font-black text-brand-orange mb-4">$ 8.000</span>
                 <button onclick="openDetailModal('Gaseosa 1.5L', 8000, 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=600&q=80', 'Línea de refrescos familiares (Coca-Cola, Colombiana, Manzana Postobón).')" class="w-full bg-brand-orange text-white text-sm font-black py-2.5 rounded-md mt-auto hover:bg-orange-600 transition-colors">AÑADIR</button>
             </div>
-
         </div>
     </main>
 
-    <footer class="bg-zinc-950 border-t border-zinc-800 py-8 mt-auto">
-        <div class="max-w-7xl mx-auto px-6 text-center text-zinc-500 text-sm space-y-1">
-            <p><strong>Horarios de Atención:</strong> Lunes a Domingo de 11:00 AM a 11:00 PM</p>
+    <section id="promociones" class="bg-zinc-950 py-16 border-t border-b border-zinc-800 scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center space-y-2 mb-10">
+                <h2 class="text-3xl font-black tracking-tight uppercase"><span class="text-brand-orange">PROMOCIONES</span> ACTIVAS</h2>
+            </div>
+            <div class="bg-zinc-900 rounded-xl border border-brand-orange/50 overflow-hidden flex flex-col md:flex-row items-center shadow-2xl">
+                <div class="w-full md:w-1/2 h-64 md:h-auto">
+                    <img src="https://images.unsplash.com/photo-1590947132387-155cc02f3212?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Promoción Pizza">
+                </div>
+                <div class="p-8 md:p-12 space-y-4 text-center md:text-left w-full md:w-1/2">
+                    <span class="bg-orange-500/20 text-brand-orange text-xs font-black px-3 py-1 rounded-full uppercase tracking-widest border border-brand-orange/30">Solo los Martes</span>
+                    <h3 class="text-3xl font-black uppercase text-white">MARTES DE 2X1</h3>
+                    <p class="text-zinc-400 text-sm">Lleva dos pizzas familiares por el precio de una. Válido únicamente para sabores tradicionales (Pepperoni, Hawaiana, Vegetariana).</p>
+                    <button onclick="document.getElementById('menu').scrollIntoView();" class="mt-4 bg-brand-orange text-white text-sm font-black py-3 px-8 rounded-md hover:bg-orange-600 transition-colors">ORDENAR PROMO</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="nosotros" class="py-16 scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
+            <div class="w-full md:w-1/2 space-y-6">
+                <h2 class="text-3xl font-black tracking-tight uppercase">SOBRE <span class="text-brand-orange">NOSOTROS</span></h2>
+                <p class="text-zinc-300 leading-relaxed text-sm">
+                    En <strong>Vikingos Pizza</strong> somos un establecimiento de comidas rápidas ubicado con orgullo en el corazón de <strong>Soacha Compartir</strong>. Nacimos con la idea de llevar sabores legendarios y porciones abundantes a la mesa de todas las familias del sector.
+                </p>
+                <p class="text-zinc-300 leading-relaxed text-sm">
+                    Trabajamos día a día con ingredientes frescos y seleccionados. Desde nuestra masa artesanal hasta las salsas especiales de la casa, cada detalle está pensado para ofrecerte la mejor experiencia gastronómica.
+                </p>
+                <div class="grid grid-cols-2 gap-4 pt-4 border-t border-zinc-800">
+                    <div>
+                        <h4 class="font-black text-brand-orange text-2xl">+5</h4>
+                        <p class="text-xs text-zinc-400 uppercase font-bold">Años de Experiencia</p>
+                    </div>
+                    <div>
+                        <h4 class="font-black text-brand-orange text-2xl">100%</h4>
+                        <p class="text-xs text-zinc-400 uppercase font-bold">Ingredientes Frescos</p>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 relative">
+                <div class="absolute inset-0 bg-brand-orange rounded-xl transform rotate-3 scale-105 opacity-20"></div>
+                <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=80" alt="Horno de pizza" class="relative rounded-xl border border-zinc-800 shadow-2xl">
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto" class="bg-zinc-950 border-t border-zinc-800 pt-16 pb-8 mt-auto scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 mb-12 text-center md:text-left border-b border-zinc-800 pb-12">
+            
+            <div class="space-y-4">
+                <div class="flex items-center justify-center md:justify-start space-x-3">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3132/3132693.png" alt="Logo" class="w-8 h-8 rounded-full border border-zinc-800 bg-white">
+                    <span class="text-2xl font-black tracking-wider text-brand-orange uppercase">Vikingos Pizza</span>
+                </div>
+                <p class="text-zinc-400 text-sm">Las mejores pizzas y comidas rápidas de Soacha Compartir. ¡Sabor que conquista!</p>
+            </div>
+            
+            <div class="space-y-4">
+                <h4 class="text-white font-bold uppercase tracking-wide">Contáctanos</h4>
+                <ul class="text-zinc-400 text-sm space-y-3">
+                    <li><i class="fa-solid fa-location-dot w-6 text-brand-orange"></i> Soacha Compartir, Cundinamarca</li>
+                    <li><i class="fa-solid fa-phone w-6 text-brand-orange"></i> 300 316 35 21</li>
+                    <li><i class="fa-brands fa-whatsapp w-6 text-brand-orange"></i> Pedidos por WhatsApp</li>
+                </ul>
+            </div>
+            
+            <div class="space-y-4">
+                <h4 class="text-white font-bold uppercase tracking-wide">Horarios</h4>
+                <ul class="text-zinc-400 text-sm space-y-3">
+                    <li>Lunes a Viernes:<br><strong class="text-white">11:00 AM - 11:00 PM</strong></li>
+                    <li>Sábados, Domingos y Festivos:<br><strong class="text-white">11:00 AM - 12:00 AM</strong></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 text-center text-zinc-500 text-xs space-y-1">
             <p>© 2026 Vikingos Pizza - Proyecto Académico</p>
-            <p class="text-xs text-zinc-600">Ingeniería de Software | Corporación Universitaria Iberoamericana</p>
+            <p>Ingeniería de Software | Corporación Universitaria Iberoamericana</p>
         </div>
     </footer>
 
@@ -226,7 +304,7 @@
 
                 <div class="border-t border-zinc-800 pt-4">
                     <p class="font-bold text-sm mb-2 text-brand-orange uppercase tracking-wider">3. Notas especiales o cambios</p>
-                    <textarea id="detail-notes" placeholder="Ej. Quitar cebolla, cambiar bebida por Zero..." class="w-full bg-zinc-950 border border-zinc-800 rounded p-2.5 text-xs text-white focus:outline-none focus:border-brand-orange resize-none h-14"></textarea>
+                    <textarea id="detail-notes" placeholder="Ej. Quitar cebolla, cambiar bebida..." class="w-full bg-zinc-950 border border-zinc-800 rounded p-2.5 text-xs text-white focus:outline-none focus:border-brand-orange resize-none h-14"></textarea>
                 </div>
 
                 <div class="border-t border-zinc-800 pt-4 flex space-x-3">
@@ -289,13 +367,11 @@
     </div>
 
     <script>
-        // Variables globales
         let cart = [];
         const deliveryFee = 2500;
         let currentProduct = {};
         let modalQuantity = 1;
 
-        // Filtrado de Menú
         function filterMenu(category, btn) {
             document.querySelectorAll('.filter-btn').forEach(b => { 
                 b.classList.remove('bg-brand-orange', 'text-white'); 
@@ -309,36 +385,31 @@
             });
         }
 
-        // Apertura y Preparación del Modal de Detalles
         function openDetailModal(name, price, img, desc) {
             currentProduct = { name, basePrice: price };
-            modalQuantity = 1; // Reiniciar cantidad
+            modalQuantity = 1; 
             
             document.getElementById('detail-title').innerText = name;
             document.getElementById('detail-desc').innerText = desc;
             document.getElementById('detail-img').src = img;
             
-            // Limpiar inputs del modal
             document.getElementById('extra-cheese').checked = false;
             document.getElementById('detail-notes').value = '';
             document.querySelector('input[name="size"][value="Mediana"]').checked = true;
             
-            updateModalPrice(); // Actualiza visualmente el total
+            updateModalPrice(); 
             document.getElementById('detail-modal').style.display = 'flex';
 
-            // Comportamiento al hacer clic en "AÑADIR AL PEDIDO"
             document.getElementById('btn-add-detail').onclick = () => {
                 let finalPrice = currentProduct.basePrice;
                 let size = document.querySelector('input[name="size"]:checked').value;
                 let extraCheese = document.getElementById('extra-cheese').checked;
                 let clientNotes = document.getElementById('detail-notes').value.trim();
                 
-                // Cálculo de adiciones para la orden
                 if (size === 'Personal') finalPrice -= 4000;
                 if (size === 'Familiar') finalPrice += 7000;
                 if (extraCheese) finalPrice += 3000;
 
-                // Crear especificaciones de texto
                 let specifications = `Tamaño: ${size}`;
                 if (extraCheese) specifications += ' + Extra Queso';
                 if (clientNotes) specifications += ` | Nota: ${clientNotes}`;
@@ -348,14 +419,12 @@
             };
         }
 
-        // Cambiar cantidad dentro del modal
         function changeModalQty(amount) {
             modalQuantity += amount;
             if (modalQuantity < 1) modalQuantity = 1;
             updateModalPrice();
         }
 
-        // Refrescar el botón de precio total del modal
         function updateModalPrice() {
             let tempPrice = currentProduct.basePrice;
             let size = document.querySelector('input[name="size"]:checked').value;
@@ -379,7 +448,6 @@
             document.getElementById('cart-sidebar').classList.toggle('translate-x-full'); 
         }
 
-        // Añadir ítem procesado al array del carrito
         function addToCart(name, price, notes, qty = 1) {
             const existingItem = cart.find(item => item.name === name && item.notes === notes);
             if (existingItem) {
@@ -389,19 +457,16 @@
             }
             updateCartUI();
             
-            // Abre el carrito automáticamente si estaba oculto
             if (document.getElementById('cart-sidebar').classList.contains('translate-x-full')) {
                 toggleCart();
             }
         }
 
-        // Refrescar la interfaz del Carrito (Sidebar)
         function updateCartUI() {
             const container = document.getElementById('cart-items');
             document.getElementById('cart-count').innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
             const btnCheckout = document.getElementById('btn-checkout');
 
-            // Estado: Carrito Vacío
             if (cart.length === 0) {
                 container.innerHTML = '<p class="text-zinc-500 text-sm text-center py-8">Tu carrito está vacío.</p>';
                 document.getElementById('cart-subtotal').innerText = "$ 0"; 
@@ -412,7 +477,6 @@
                 return;
             }
 
-            // Estado: Carrito con Ítems
             btnCheckout.disabled = false; 
             btnCheckout.classList.remove('opacity-50', 'cursor-not-allowed');
             btnCheckout.classList.add('hover:bg-orange-600');
@@ -440,14 +504,12 @@
             document.getElementById('cart-total').innerText = `$ ${(subtotal + deliveryFee).toLocaleString('es-CO')}`;
         }
 
-        // Modificar cantidad desde el sidebar del carrito
         function changeQty(index, amount) { 
             cart[index].quantity += amount; 
             if (cart[index].quantity <= 0) cart.splice(index, 1); 
             updateCartUI(); 
         }
 
-        // Manejo de Modales de Checkout y Éxito
         function openCheckoutModal() { 
             toggleCart(); 
             document.getElementById('checkout-modal').style.display = 'flex'; 
@@ -458,12 +520,11 @@
         }
 
         function confirmOrder(event) { 
-            event.preventDefault(); // Detiene el comportamiento de envío del form HTML nativo
+            event.preventDefault(); 
             closeCheckoutModal(); 
             document.getElementById('success-modal').style.display = 'flex'; 
         }
 
-        // Reset completo al presionar "VOLVER"
         function finishProcess() { 
             window.location.reload(); 
         }
