@@ -236,6 +236,7 @@ border-radius:22px;
 overflow:hidden;
 transition:.4s;
 border:1px solid #1f1f1f;
+position:relative;
 }
 
 .product-card:hover{
@@ -292,6 +293,7 @@ border:none;
 border-radius:10px;
 font-weight:700;
 cursor:pointer;
+transition:.3s;
 }
 
 .details-btn{
@@ -302,6 +304,34 @@ color:white;
 .cart-btn{
 background:#ff7a00;
 color:white;
+}
+
+.cart-btn:hover{
+transform:scale(1.05);
+}
+
+/* =========================================
+MENSAJE AGREGADO
+========================================= */
+
+.added-message{
+position:absolute;
+top:20px;
+right:20px;
+background:#00c853;
+padding:10px 18px;
+border-radius:12px;
+font-size:13px;
+font-weight:800;
+opacity:0;
+transform:translateY(-20px);
+transition:.4s;
+pointer-events:none;
+}
+
+.added-message.show{
+opacity:1;
+transform:translateY(0);
 }
 
 /* =========================================
@@ -357,42 +387,6 @@ font-size:44px;
 font-weight:900;
 color:#ff7a00;
 margin-bottom:20px;
-}
-
-/* =========================================
-NOSOTROS
-========================================= */
-
-.about{
-padding:120px 0;
-background:#0a0a0a;
-}
-
-.about-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:60px;
-align-items:center;
-}
-
-.about-image img{
-width:100%;
-border-radius:25px;
-}
-
-.about-text h2{
-font-size:60px;
-margin-bottom:25px;
-}
-
-.about-text span{
-color:#ff7a00;
-}
-
-.about-text p{
-color:#bbb;
-line-height:2;
-margin-bottom:25px;
 }
 
 /* =========================================
@@ -487,14 +481,14 @@ CARRITO
 position:fixed;
 right:25px;
 bottom:25px;
-width:70px;
-height:70px;
+width:75px;
+height:75px;
 background:#ff7a00;
 border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:28px;
+font-size:30px;
 cursor:pointer;
 z-index:999;
 box-shadow:0 10px 30px rgba(0,0,0,.4);
@@ -506,8 +500,8 @@ top:-5px;
 right:-5px;
 background:white;
 color:black;
-width:28px;
-height:28px;
+width:30px;
+height:30px;
 border-radius:50%;
 display:flex;
 align-items:center;
@@ -738,7 +732,6 @@ RESPONSIVE
 @media(max-width:1000px){
 
 .hero-content,
-.about-grid,
 .contact-grid{
 grid-template-columns:1fr;
 }
@@ -748,7 +741,6 @@ font-size:48px;
 }
 
 .section-title h2,
-.about-text h2,
 .contact-form h2{
 font-size:42px;
 }
@@ -777,6 +769,8 @@ font-size:38px;
 
 <body>
 
+<!-- HEADER -->
+
 <header>
 
 <div class="container navbar">
@@ -794,7 +788,6 @@ font-size:38px;
 <a href="#inicio">INICIO</a>
 <a href="#menu">MENÚ</a>
 <a href="#promos">PROMOCIONES</a>
-<a href="#nosotros">NOSOTROS</a>
 <a href="#contacto">CONTACTO</a>
 
 </nav>
@@ -905,7 +898,7 @@ PEDIR A DOMICILIO
 
 </section>
 
-<!-- MENU -->
+<!-- MENÚ -->
 
 <section class="menu-section" id="menu">
 
@@ -926,9 +919,13 @@ Explora nuestras especialidades
 
 <div class="products-grid">
 
-<!-- PRODUCTO 1 -->
+<!-- PIZZA -->
 
 <div class="product-card">
+
+<div class="added-message">
+✔ Agregado
+</div>
 
 <div class="product-image">
 <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=900">
@@ -955,11 +952,7 @@ VER DETALLE
 
 <button 
 class="cart-btn"
-onclick="addToCart(
-'Pizza Vikinga',
-33900,
-'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=900'
-)">
+onclick="addToCart(this,'Pizza Vikinga',33900,'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=900')">
 AGREGAR
 </button>
 
@@ -969,9 +962,13 @@ AGREGAR
 
 </div>
 
-<!-- PRODUCTO 2 -->
+<!-- HAWAIANA -->
 
 <div class="product-card">
+
+<div class="added-message">
+✔ Agregado
+</div>
 
 <div class="product-image">
 <img src="https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=900">
@@ -997,11 +994,7 @@ VER DETALLE
 
 <button 
 class="cart-btn"
-onclick="addToCart(
-'Pizza Hawaiana',
-29900,
-'https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=900'
-)">
+onclick="addToCart(this,'Pizza Hawaiana',29900,'https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=900')">
 AGREGAR
 </button>
 
@@ -1011,9 +1004,13 @@ AGREGAR
 
 </div>
 
-<!-- PRODUCTO 3 -->
+<!-- HAMBURGUESA -->
 
 <div class="product-card">
+
+<div class="added-message">
+✔ Agregado
+</div>
 
 <div class="product-image">
 <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=900">
@@ -1039,11 +1036,7 @@ VER DETALLE
 
 <button 
 class="cart-btn"
-onclick="addToCart(
-'Hamburguesa BBQ',
-24900,
-'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=900'
-)">
+onclick="addToCart(this,'Hamburguesa BBQ',24900,'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=900')">
 AGREGAR
 </button>
 
@@ -1053,49 +1046,40 @@ AGREGAR
 
 </div>
 
+<!-- COCA COLA -->
+
+<div class="product-card">
+
+<div class="added-message">
+✔ Agregado
 </div>
 
+<div class="product-image">
+<img src="https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=900">
 </div>
 
-</section>
+<div class="product-content">
 
-<!-- PROMOS -->
+<h3>Coca-Cola 1.5L</h3>
 
-<section class="promo-section" id="promos">
+<p>
+Gaseosa Coca-Cola helada ideal para acompañar tu comida.
+</p>
 
-<div class="container">
-
-<div class="section-title">
-
-<h2>
-PROMOCIONES
-<span>VIKINGOS</span>
-</h2>
-
+<div class="price">
+$8.900
 </div>
 
-<div class="promo-grid">
+<div class="product-buttons">
 
-<div class="promo-card">
+<button class="details-btn">
+VER DETALLE
+</button>
 
-<img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=900">
-
-<div class="promo-info">
-
-<div class="promo-tag">
-🔥 COMBO
-</div>
-
-<h3>
-FAMILIAR
-</h3>
-
-<div class="promo-price">
-$79.900
-</div>
-
-<button class="order-btn">
-ORDENAR
+<button 
+class="cart-btn"
+onclick="addToCart(this,'Coca-Cola 1.5L',8900,'https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=900')">
+AGREGAR
 </button>
 
 </div>
@@ -1104,38 +1088,89 @@ ORDENAR
 
 </div>
 
+<!-- PEPSI -->
+
+<div class="product-card">
+
+<div class="added-message">
+✔ Agregado
 </div>
 
-</section>
+<div class="product-image">
+<img src="https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=900">
+</div>
 
-<!-- NOSOTROS -->
+<div class="product-content">
 
-<section class="about" id="nosotros">
+<h3>Pepsi 1L</h3>
 
-<div class="container about-grid">
+<p>
+Pepsi fría y refrescante para compartir.
+</p>
 
-<div class="about-image">
+<div class="price">
+$6.900
+</div>
 
-<img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1200">
+<div class="product-buttons">
+
+<button class="details-btn">
+VER DETALLE
+</button>
+
+<button 
+class="cart-btn"
+onclick="addToCart(this,'Pepsi 1L',6900,'https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=900')">
+AGREGAR
+</button>
 
 </div>
 
-<div class="about-text">
+</div>
 
-<h2>
-SOBRE
-<span>NOSOTROS</span>
-</h2>
+</div>
+
+<!-- SPRITE -->
+
+<div class="product-card">
+
+<div class="added-message">
+✔ Agregado
+</div>
+
+<div class="product-image">
+<img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=900">
+</div>
+
+<div class="product-content">
+
+<h3>Sprite 400ml</h3>
 
 <p>
-En Vikingos Pizza ofrecemos las mejores pizzas y comidas
-con ingredientes frescos y excelente atención.
+Bebida gaseosa sabor limón bien fría.
 </p>
 
-<p>
-Nuestro objetivo es brindar experiencias inolvidables
-a cada cliente.
-</p>
+<div class="price">
+$4.900
+</div>
+
+<div class="product-buttons">
+
+<button class="details-btn">
+VER DETALLE
+</button>
+
+<button 
+class="cart-btn"
+onclick="addToCart(this,'Sprite 400ml',4900,'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=900')">
+AGREGAR
+</button>
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 
@@ -1264,7 +1299,7 @@ CONFIRMAR PEDIDO
 
 </div>
 
-<!-- MENSAJE EXITOSO -->
+<!-- COMPRA EXITOSA -->
 
 <div class="success-modal" id="successModal">
 
@@ -1322,10 +1357,10 @@ document
 }
 
 /* =========================================
-AGREGAR AL CARRITO
+AGREGAR PRODUCTO
 ========================================= */
 
-function addToCart(name,price,image){
+function addToCart(button,name,price,image){
 
 const existing = cart.find(item => item.name === name);
 
@@ -1344,7 +1379,23 @@ quantity:1
 
 }
 
+/* ACTUALIZAR CARRITO */
+
 updateCart();
+
+/* MOSTRAR MENSAJE */
+
+const card = button.closest(".product-card");
+
+const message = card.querySelector(".added-message");
+
+message.classList.add("show");
+
+setTimeout(()=>{
+
+message.classList.remove("show");
+
+},1500);
 
 }
 
@@ -1504,23 +1555,15 @@ document
 
 e.preventDefault();
 
-/* CERRAR MODAL CHECKOUT */
-
 closeCheckout();
-
-/* LIMPIAR CARRITO */
 
 cart = [];
 
 updateCart();
 
-/* MOSTRAR MODAL ÉXITO */
-
 document
 .getElementById("successModal")
 .classList.add("active");
-
-/* RESETEAR FORMULARIO */
 
 this.reset();
 
