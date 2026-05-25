@@ -293,7 +293,6 @@ border:none;
 border-radius:10px;
 font-weight:700;
 cursor:pointer;
-transition:.3s;
 }
 
 .details-btn{
@@ -305,14 +304,6 @@ color:white;
 background:#ff7a00;
 color:white;
 }
-
-.cart-btn:hover{
-transform:scale(1.05);
-}
-
-/* =========================================
-MENSAJE AGREGADO
-========================================= */
 
 .added-message{
 position:absolute;
@@ -326,7 +317,6 @@ font-weight:800;
 opacity:0;
 transform:translateY(-20px);
 transition:.4s;
-pointer-events:none;
 }
 
 .added-message.show{
@@ -335,7 +325,7 @@ transform:translateY(0);
 }
 
 /* =========================================
-PROMOS
+PROMOCIONES
 ========================================= */
 
 .promo-section{
@@ -354,39 +344,58 @@ background:#111;
 border-radius:24px;
 overflow:hidden;
 border:1px solid #1f1f1f;
+position:relative;
+transition:.4s;
+}
+
+.promo-card:hover{
+transform:translateY(-10px);
 }
 
 .promo-card img{
 width:100%;
-height:250px;
+height:260px;
 object-fit:cover;
+}
+
+.promo-badge{
+position:absolute;
+top:20px;
+left:20px;
+background:#ff7a00;
+padding:10px 18px;
+border-radius:50px;
+font-size:12px;
+font-weight:800;
 }
 
 .promo-info{
 padding:30px;
 }
 
-.promo-tag{
-display:inline-block;
-background:#ff7a00;
-padding:10px 18px;
-border-radius:50px;
-font-size:12px;
-font-weight:800;
+.promo-info h3{
+font-size:36px;
+margin-bottom:15px;
+}
+
+.promo-info p{
+color:#bbb;
+line-height:1.7;
 margin-bottom:20px;
 }
 
-.promo-info h3{
-font-size:40px;
-line-height:1;
-margin-bottom:20px;
+.old-price{
+text-decoration:line-through;
+color:#777;
+font-size:20px;
+margin-bottom:5px;
 }
 
 .promo-price{
-font-size:44px;
+font-size:42px;
 font-weight:900;
 color:#ff7a00;
-margin-bottom:20px;
+margin-bottom:25px;
 }
 
 /* =========================================
@@ -491,7 +500,6 @@ justify-content:center;
 font-size:30px;
 cursor:pointer;
 z-index:999;
-box-shadow:0 10px 30px rgba(0,0,0,.4);
 }
 
 .floating-cart span{
@@ -669,14 +677,6 @@ align-items:center;
 margin-bottom:30px;
 }
 
-.checkout-header button{
-background:none;
-border:none;
-color:white;
-font-size:24px;
-cursor:pointer;
-}
-
 .checkout-content form{
 display:flex;
 flex-direction:column;
@@ -691,7 +691,6 @@ border:none;
 padding:18px;
 border-radius:12px;
 color:white;
-font-size:15px;
 }
 
 .pay-btn,
@@ -703,9 +702,8 @@ border-radius:14px;
 font-weight:800;
 color:white;
 cursor:pointer;
-font-size:16px;
-margin-top:15px;
 width:100%;
+margin-top:15px;
 }
 
 .success-icon{
@@ -721,7 +719,6 @@ color:#ff7a00;
 
 .success-content p{
 color:#ccc;
-font-size:18px;
 line-height:1.8;
 }
 
@@ -787,7 +784,7 @@ font-size:38px;
 
 <a href="#inicio">INICIO</a>
 <a href="#menu">MENÚ</a>
-<a href="#promos">PROMOCIONES</a>
+<a href="#promos">PROMOS</a>
 <a href="#contacto">CONTACTO</a>
 
 </nav>
@@ -800,7 +797,7 @@ font-size:38px;
 </div>
 
 <button class="order-btn">
-ORDENAR AHORA
+ORDENAR
 </button>
 
 </div>
@@ -871,7 +868,6 @@ DE SOACHA
 
 <p>
 Ingredientes frescos, sabor único y la mejor atención.
-Haz tu pedido y disfruta una experiencia Vikingos.
 </p>
 
 <div class="hero-buttons">
@@ -881,7 +877,7 @@ ORDENAR AHORA
 </button>
 
 <button class="hero-btn secondary">
-PEDIR A DOMICILIO
+DOMICILIOS
 </button>
 
 </div>
@@ -919,7 +915,7 @@ Explora nuestras especialidades
 
 <div class="products-grid">
 
-<!-- PIZZA -->
+<!-- PRODUCTO -->
 
 <div class="product-card">
 
@@ -936,8 +932,7 @@ Explora nuestras especialidades
 <h3>Pizza Vikinga</h3>
 
 <p>
-Pepperoni, queso mozzarella,
-jamón y salsa especial.
+Pepperoni, jamón y queso mozzarella.
 </p>
 
 <div class="price">
@@ -947,11 +942,10 @@ $33.900
 <div class="product-buttons">
 
 <button class="details-btn">
-VER DETALLE
+DETALLE
 </button>
 
-<button 
-class="cart-btn"
+<button class="cart-btn"
 onclick="addToCart(this,'Pizza Vikinga',33900,'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=900')">
 AGREGAR
 </button>
@@ -961,50 +955,6 @@ AGREGAR
 </div>
 
 </div>
-
-<!-- HAWAIANA -->
-
-<div class="product-card">
-
-<div class="added-message">
-✔ Agregado
-</div>
-
-<div class="product-image">
-<img src="https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=900">
-</div>
-
-<div class="product-content">
-
-<h3>Pizza Hawaiana</h3>
-
-<p>
-Jamón, piña y queso mozzarella.
-</p>
-
-<div class="price">
-$29.900
-</div>
-
-<div class="product-buttons">
-
-<button class="details-btn">
-VER DETALLE
-</button>
-
-<button 
-class="cart-btn"
-onclick="addToCart(this,'Pizza Hawaiana',29900,'https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=900')">
-AGREGAR
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- HAMBURGUESA -->
 
 <div class="product-card">
 
@@ -1021,7 +971,7 @@ AGREGAR
 <h3>Hamburguesa BBQ</h3>
 
 <p>
-Carne artesanal, queso cheddar y salsa BBQ.
+Carne artesanal y salsa BBQ.
 </p>
 
 <div class="price">
@@ -1031,11 +981,10 @@ $24.900
 <div class="product-buttons">
 
 <button class="details-btn">
-VER DETALLE
+DETALLE
 </button>
 
-<button 
-class="cart-btn"
+<button class="cart-btn"
 onclick="addToCart(this,'Hamburguesa BBQ',24900,'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=900')">
 AGREGAR
 </button>
@@ -1045,8 +994,6 @@ AGREGAR
 </div>
 
 </div>
-
-<!-- COCA COLA -->
 
 <div class="product-card">
 
@@ -1063,7 +1010,7 @@ AGREGAR
 <h3>Coca-Cola 1.5L</h3>
 
 <p>
-Gaseosa Coca-Cola helada ideal para acompañar tu comida.
+Gaseosa fría para acompañar.
 </p>
 
 <div class="price">
@@ -1073,11 +1020,10 @@ $8.900
 <div class="product-buttons">
 
 <button class="details-btn">
-VER DETALLE
+DETALLE
 </button>
 
-<button 
-class="cart-btn"
+<button class="cart-btn"
 onclick="addToCart(this,'Coca-Cola 1.5L',8900,'https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=900')">
 AGREGAR
 </button>
@@ -1088,85 +1034,133 @@ AGREGAR
 
 </div>
 
-<!-- PEPSI -->
-
-<div class="product-card">
-
-<div class="added-message">
-✔ Agregado
 </div>
 
-<div class="product-image">
-<img src="https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=900">
 </div>
 
-<div class="product-content">
+</section>
 
-<h3>Pepsi 1L</h3>
+<!-- PROMOCIONES -->
+
+<section class="promo-section" id="promos">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>
+PROMOCIONES
+<span>VIKINGOS</span>
+</h2>
 
 <p>
-Pepsi fría y refrescante para compartir.
+Aprovecha nuestras ofertas especiales
 </p>
 
-<div class="price">
-$6.900
 </div>
 
-<div class="product-buttons">
+<div class="promo-grid">
 
-<button class="details-btn">
-VER DETALLE
-</button>
+<div class="promo-card">
 
-<button 
-class="cart-btn"
-onclick="addToCart(this,'Pepsi 1L',6900,'https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=900')">
-AGREGAR
-</button>
-
+<div class="promo-badge">
+🔥 MÁS VENDIDO
 </div>
 
-</div>
+<img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=900">
 
-</div>
+<div class="promo-info">
 
-<!-- SPRITE -->
-
-<div class="product-card">
-
-<div class="added-message">
-✔ Agregado
-</div>
-
-<div class="product-image">
-<img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=900">
-</div>
-
-<div class="product-content">
-
-<h3>Sprite 400ml</h3>
+<h3>
+Combo Familiar
+</h3>
 
 <p>
-Bebida gaseosa sabor limón bien fría.
+Pizza grande + Coca-Cola + Papas.
 </p>
 
-<div class="price">
-$4.900
+<div class="old-price">
+$99.900
 </div>
 
-<div class="product-buttons">
+<div class="promo-price">
+$79.900
+</div>
 
-<button class="details-btn">
-VER DETALLE
-</button>
-
-<button 
-class="cart-btn"
-onclick="addToCart(this,'Sprite 400ml',4900,'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=900')">
-AGREGAR
+<button class="order-btn"
+onclick="addPromoToCart('Combo Familiar',79900,'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=900')">
+ORDENAR
 </button>
 
 </div>
+
+</div>
+
+<div class="promo-card">
+
+<div class="promo-badge">
+⚡ 2x1
+</div>
+
+<img src="https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=900">
+
+<div class="promo-info">
+
+<h3>
+2x1 Hawaianas
+</h3>
+
+<p>
+Dos pizzas hawaianas por tiempo limitado.
+</p>
+
+<div class="old-price">
+$59.900
+</div>
+
+<div class="promo-price">
+$39.900
+</div>
+
+<button class="order-btn"
+onclick="addPromoToCart('2x1 Hawaianas',39900,'https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=900')">
+ORDENAR
+</button>
+
+</div>
+
+</div>
+
+<div class="promo-card">
+
+<div class="promo-badge">
+🍔 BURGER
+</div>
+
+<img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=900">
+
+<div class="promo-info">
+
+<h3>
+Burger Combo
+</h3>
+
+<p>
+Hamburguesa + papas + gaseosa.
+</p>
+
+<div class="old-price">
+$34.900
+</div>
+
+<div class="promo-price">
+$24.900
+</div>
+
+<button class="order-btn"
+onclick="addPromoToCart('Burger Combo',24900,'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=900')">
+ORDENAR
+</button>
 
 </div>
 
@@ -1245,9 +1239,7 @@ ENVIAR MENSAJE
 
 <h2>Finalizar Compra</h2>
 
-<button onclick="closeCheckout()">
-✖
-</button>
+<button onclick="closeCheckout()">✖</button>
 
 </div>
 
@@ -1260,8 +1252,6 @@ ENVIAR MENSAJE
 <input type="email" placeholder="Correo electrónico" required>
 
 <input type="text" placeholder="Dirección de entrega" required>
-
-<input type="text" placeholder="Barrio" required>
 
 <textarea rows="4" placeholder="Indicaciones adicionales"></textarea>
 
@@ -1314,12 +1304,12 @@ CONFIRMAR PEDIDO
 </h2>
 
 <p>
-Para nosotros es un placer atenderte.<br>
-Tu pedido fue recibido correctamente y pronto comenzaremos a prepararlo.
+Para nosotros es un placer atenderte.
+Tu pedido fue recibido correctamente.
 </p>
 
 <button class="back-home-btn" onclick="goHome()">
-VOLVER AL MENÚ PRINCIPAL
+VOLVER AL INICIO
 </button>
 
 </div>
@@ -1332,7 +1322,7 @@ VOLVER AL MENÚ PRINCIPAL
 
 <div class="container">
 
-© 2026 Vikingos Pizza - Todos los derechos reservados
+© 2026 Vikingos Pizza
 
 </div>
 
@@ -1344,10 +1334,6 @@ VOLVER AL MENÚ PRINCIPAL
 
 let cart = [];
 
-/* =========================================
-TOGGLE CARRITO
-========================================= */
-
 function toggleCart(){
 
 document
@@ -1355,10 +1341,6 @@ document
 .classList.toggle("active");
 
 }
-
-/* =========================================
-AGREGAR PRODUCTO
-========================================= */
 
 function addToCart(button,name,price,image){
 
@@ -1379,11 +1361,7 @@ quantity:1
 
 }
 
-/* ACTUALIZAR CARRITO */
-
 updateCart();
-
-/* MOSTRAR MENSAJE */
 
 const card = button.closest(".product-card");
 
@@ -1399,9 +1377,32 @@ message.classList.remove("show");
 
 }
 
-/* =========================================
-ACTUALIZAR CARRITO
-========================================= */
+function addPromoToCart(name,price,image){
+
+const existing = cart.find(item => item.name === name);
+
+if(existing){
+
+existing.quantity++;
+
+}else{
+
+cart.push({
+name,
+price,
+image,
+quantity:1
+});
+
+}
+
+updateCart();
+
+document
+.getElementById("cartSidebar")
+.classList.add("active");
+
+}
 
 function updateCart(){
 
@@ -1460,10 +1461,8 @@ $${item.price.toLocaleString()}
 +
 </button>
 
-<button 
-class="remove-btn"
-onclick="removeItem(${index})"
->
+<button class="remove-btn"
+onclick="removeItem(${index})">
 🗑
 </button>
 
@@ -1483,10 +1482,6 @@ cartTotal.innerText = "$" + total.toLocaleString();
 
 }
 
-/* =========================================
-CAMBIAR CANTIDAD
-========================================= */
-
 function changeQuantity(index,change){
 
 cart[index].quantity += change;
@@ -1501,10 +1496,6 @@ updateCart();
 
 }
 
-/* =========================================
-ELIMINAR PRODUCTO
-========================================= */
-
 function removeItem(index){
 
 cart.splice(index,1);
@@ -1512,10 +1503,6 @@ cart.splice(index,1);
 updateCart();
 
 }
-
-/* =========================================
-ABRIR CHECKOUT
-========================================= */
 
 function openCheckout(){
 
@@ -1533,10 +1520,6 @@ document
 
 }
 
-/* =========================================
-CERRAR CHECKOUT
-========================================= */
-
 function closeCheckout(){
 
 document
@@ -1544,10 +1527,6 @@ document
 .classList.remove("active");
 
 }
-
-/* =========================================
-FINALIZAR PEDIDO
-========================================= */
 
 document
 .getElementById("checkoutForm")
@@ -1569,10 +1548,6 @@ this.reset();
 
 });
 
-/* =========================================
-VOLVER AL INICIO
-========================================= */
-
 function goHome(){
 
 document
@@ -1585,26 +1560,6 @@ behavior:"smooth"
 });
 
 }
-
-/* =========================================
-BOTONES ORDENAR
-========================================= */
-
-document
-.querySelectorAll(".order-btn,.primary")
-.forEach(btn=>{
-
-btn.addEventListener("click",()=>{
-
-document
-.getElementById("menu")
-.scrollIntoView({
-behavior:"smooth"
-});
-
-});
-
-});
 
 </script>
 
