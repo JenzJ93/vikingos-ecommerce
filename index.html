@@ -50,39 +50,153 @@
 </head>
 <body class="bg-viking-black text-white antialiased min-h-screen flex flex-col relative">
 
+    <!-- Cinta superior pequeña -->
     <div class="bg-brand-orange text-white text-xs font-bold text-center py-1.5 px-4 tracking-wide">
         ¡Promo de locura! 2x1 en Pizzas Seleccionadas todos los Martes. Aplican T&C.
     </div>
 
-<nav class="bg-viking-black sticky top-0 z-40 border-b border-zinc-800 px-6 py-4 flex justify-between items-center shadow-lg">
-    
-    <div class="flex items-center space-x-3 cursor-pointer" onclick="document.getElementById('inicio').scrollIntoView();">
-        <img src="./logo.png" alt="Logo Vikingos Pizza" class="w-16 h-16 rounded-full object-cover">
-        <span class="text-3xl font-black tracking-wider text-brand-orange uppercase">Vikingos Pizza</span>
-    </div>
-    
-    <div class="hidden md:flex space-x-8 font-semibold text-sm tracking-wide">
-        ...
-    </div>
-</nav>
+    <!-- NAV PRINCIPAL -->
+    <nav class="bg-[#050505] sticky top-0 z-40 border-b border-zinc-900 px-10 py-4 flex justify-between items-center shadow-[0_10px_30px_rgba(0,0,0,0.7)]">
+        <!-- Logo + Marca -->
+        <div class="flex items-center space-x-3 cursor-pointer" onclick="document.getElementById('inicio').scrollIntoView({behavior:'smooth'});">
+            <img src="./logo.png" alt="Logo Vikingos Pizza" class="w-16 h-16 rounded-full object-cover">
+            <span class="text-3xl font-black tracking-wider text-brand-orange uppercase">Vikingos Pizza</span>
+        </div>
 
+        <!-- Menú + Teléfono + Botón -->
+        <div class="hidden md:flex items-center space-x-8 font-semibold text-sm tracking-wide">
+            <div class="flex space-x-6">
+                <a href="#inicio" class="hover:text-[#F97316] transition-colors">INICIO</a>
+                <a href="#menu" class="hover:text-[#F97316] transition-colors">MENÚ</a>
+                <a href="#promociones" class="hover:text-[#F97316] transition-colors">PROMOCIONES</a>
+                <a href="#nosotros" class="hover:text-[#F97316] transition-colors">NOSOTROS</a>
+                <a href="#contacto" class="hover:text-[#F97316] transition-colors">CONTACTO</a>
+            </div>
 
-    <header id="inicio" class="relative py-32 px-6 border-b border-zinc-800 bg-cover bg-center bg-no-repeat" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.95) 100%), url('https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=2000&q=100');">
-        <div class="max-w-5xl mx-auto text-center space-y-6 relative z-10">
-            <h1 class="text-5xl md:text-7xl font-black tracking-tight leading-tight text-white drop-shadow-2xl">
-                LAS MEJORES PIZZAS Y COMIDAS <br>
-                <span class="text-brand-orange">DE SOACHA COMPARTIR</span>
-            </h1>
-            <p class="text-zinc-200 max-w-2xl mx-auto text-base md:text-lg font-medium drop-shadow-md">
-                Ingredientes frescos, sabor único y la mejor atención. Haz tu pedido en línea.
-            </p>
-            <div class="pt-4">
-                <a href="#menu" class="inline-block bg-brand-orange text-white text-sm font-black uppercase px-10 py-4 rounded-md hover:bg-orange-600 transition-colors tracking-wide shadow-[0_4px_14px_0_rgba(249,115,22,0.4)]">
-                    VER CATÁLOGO
-                </a>
+            <div class="flex items-center space-x-4 pl-8 border-l border-zinc-800">
+                <!-- “Pídelo ahora” + Teléfono -->
+                <div class="bg-black/60 border border-white/10 rounded-full px-4 py-1.5 flex flex-col leading-tight">
+                    <span class="uppercase text-[10px] text-zinc-300 tracking-[0.25em]">Pídelo ahora</span>
+                    <span class="font-black text-sm text-white">300 316 35 21</span>
+                </div>
+                <!-- Botón “ORDENAR AHORA” -->
+                <button
+                    onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'});"
+                    class="bg-brand-orange text-white font-black text-xs uppercase tracking-[0.25em] px-6 py-3 rounded-full shadow-[0_10px_25px_rgba(0,0,0,0.7)] hover:bg-orange-500 transition-colors flex items-center space-x-2">
+                    <span>Ordenar ahora</span>
+                    <i class="fa-solid fa-arrow-right-long text-[11px]"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO PRINCIPAL -->
+    <header id="inicio" class="relative border-b border-zinc-800 bg-gradient-to-r from-black via-black to-[#1a0b03] overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 lg:px-10 py-16 lg:py-20 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center relative z-10">
+            
+            <!-- Columna texto -->
+            <div class="space-y-6">
+                <p class="uppercase text-xs tracking-[0.3em] text-orange-400 font-bold">Sabor vikingo que conquista</p>
+                <h1 class="text-4xl md:text-5xl lg:text-[3.3rem] font-black tracking-tight leading-tight text-white drop-shadow-2xl">
+                    LAS MEJORES <span class="text-brand-orange">PIZZAS</span> Y COMIDAS<br>
+                    DE <span class="text-brand-orange">SOACHA COMPARTIR</span>
+                </h1>
+                <p class="text-zinc-200 max-w-xl text-sm md:text-base font-medium drop-shadow-md">
+                    Ingredientes frescos, sabor único y la mejor atención. Haz tu pedido y disfrútalo en Soacha Compartir.
+                </p>
+
+                <!-- Botones hero -->
+                <div class="flex flex-wrap items-center gap-4 pt-4">
+                    <button
+                        onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'});"
+                        class="bg-brand-orange text-white text-xs md:text-sm font-black uppercase px-8 py-3 rounded-full hover:bg-orange-600 transition-colors tracking-[0.2em] shadow-[0_10px_30px_rgba(249,115,22,0.6)]">
+                        Ordenar ahora
+                    </button>
+                    <button
+                        onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'});"
+                        class="bg-transparent border border-zinc-700 text-white text-xs md:text-sm font-black uppercase px-8 py-3 rounded-full hover:border-brand-orange hover:text-brand-orange transition-colors tracking-[0.2em]">
+                        Pedido a domicilio
+                    </button>
+                </div>
+            </div>
+
+            <!-- Columna imagen pizza + sello -->
+            <div class="relative flex justify-center lg:justify-end">
+                <!-- glow -->
+                <div class="absolute -bottom-10 right-8 w-72 h-72 bg-brand-orange/40 blur-3xl rounded-full opacity-70"></div>
+
+                <!-- Pizza -->
+                <div class="relative z-10">
+                    <img
+                        src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=900&q=90"
+                        alt="Pizza Pepperoni Vikinga"
+                        class="w-[380px] lg:w-[430px] drop-shadow-[0_25px_60px_rgba(0,0,0,0.9)] rounded-full object-cover">
+                </div>
+
+                <!-- Sello “Sabor vikingo que conquista” -->
+                <div class="absolute -top-4 -left-4 md:-top-6 md:-left-10 z-20">
+                    <div class="bg-[#ffcf4f] text-[#5f2500] rounded-[999px] px-5 py-2 shadow-[0_12px_30px_rgba(0,0,0,0.7)] border-2 border-[#ff7a00] flex flex-col items-start">
+                        <span class="text-[10px] font-black uppercase tracking-[0.25em]">Sabor</span>
+                        <span class="text-sm font-black uppercase leading-tight">Vikingo</span>
+                        <span class="text-[10px] font-bold uppercase text-[#8b3b00] tracking-[0.18em]">Que conquista</span>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
+
+    <!-- FRANJA “NUESTROS PRODUCTOS” / CATEGORÍAS -->
+    <section class="bg-white text-black py-8 border-b border-zinc-200">
+        <div class="max-w-7xl mx-auto px-6 lg:px-10 space-y-4">
+            <div class="text-center">
+                <h2 class="text-2xl md:text-3xl font-black tracking-tight uppercase text-zinc-900">
+                    NUESTROS <span class="text-brand-orange">PRODUCTOS</span>
+                </h2>
+                <p class="text-xs md:text-sm text-zinc-600 mt-1">
+                    Explora nuestras categorías y elige tu favorita
+                </p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-6 md:gap-10 pt-4 text-center text-xs md:text-sm font-bold text-zinc-700">
+                <button onclick="filterMenu('pizza', this)" class="category-item flex flex-col items-center space-y-2">
+                    <div class="w-14 h-14 rounded-full bg-orange-100 border border-orange-300 flex items-center justify-center">
+                        <i class="fa-solid fa-pizza-slice text-brand-orange text-xl"></i>
+                    </div>
+                    <span class="uppercase tracking-wide">Pizzas</span>
+                </button>
+                <button onclick="filterMenu('hamburguesa', this)" class="category-item flex flex-col items-center space-y-2">
+                    <div class="w-14 h-14 rounded-full bg-orange-100 border border-orange-300 flex items-center justify-center">
+                        <i class="fa-solid fa-burger text-brand-orange text-xl"></i>
+                    </div>
+                    <span class="uppercase tracking-wide">Hamburguesas</span>
+                </button>
+                <button onclick="filterMenu('perros', this)" class="category-item flex flex-col items-center space-y-2">
+                    <div class="w-14 h-14 rounded-full bg-orange-100 border border-orange-300 flex items-center justify-center">
+                        <i class="fa-solid fa-hotdog text-brand-orange text-xl"></i>
+                    </div>
+                    <span class="uppercase tracking-wide">Perros</span>
+                </button>
+                <button onclick="filterMenu('combos', this)" class="category-item flex flex-col items-center space-y-2">
+                    <div class="w-14 h-14 rounded-full bg-orange-100 border border-orange-300 flex items-center justify-center">
+                        <i class="fa-solid fa-box text-brand-orange text-xl"></i>
+                    </div>
+                    <span class="uppercase tracking-wide">Combos</span>
+                </button>
+                <button onclick="filterMenu('bebida', this)" class="category-item flex flex-col items-center space-y-2">
+                    <div class="w-14 h-14 rounded-full bg-orange-100 border border-orange-300 flex items-center justify-center">
+                        <i class="fa-solid fa-wine-glass-empty text-brand-orange text-xl"></i>
+                    </div>
+                    <span class="uppercase tracking-wide">Bebidas</span>
+                </button>
+                <button onclick="filterMenu('postre', this)" class="category-item flex flex-col items-center space-y-2">
+                    <div class="w-14 h-14 rounded-full bg-orange-100 border border-orange-300 flex items-center justify-center">
+                        <i class="fa-solid fa-ice-cream text-brand-orange text-xl"></i>
+                    </div>
+                    <span class="uppercase tracking-wide">Postres</span>
+                </button>
+            </div>
+        </div>
+    </section>
 
     <main id="menu" class="max-w-7xl mx-auto px-6 py-16 w-full space-y-8 scroll-mt-20">
         <div class="text-center space-y-2">
