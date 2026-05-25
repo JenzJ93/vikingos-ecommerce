@@ -1,747 +1,623 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Vikingos - Demo Completa</title>
-  <style>
-    :root{
-      --bg:#0f0f10; --panel:#111; --muted:#b5b5b5; --accent:#ff7a00; --accent-dark:#e05e00; --white:#fff;
-      --card-bg:#fff; --card-border:#e6e6e6;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--white);-webkit-font-smoothing:antialiased}
-    a{color:inherit;text-decoration:none}
-    .container{max-width:1180px;margin:0 auto;padding:0 18px}
-    .hidden{display:none}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vikingos - Demo Completa</title>
 
-    /* NAV */
-    .topbar{background:#070707;border-bottom:3px solid #0b6bd6;z-index:900;position:sticky;top:0}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{
-      width:56px;height:56px;border-radius:8px;
-      background:#000;display:flex;align-items:center;justify-content:center;
-      overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,0.6)
-    }
-    .logo-img{width:100%;height:100%;object-fit:contain}
-    .nav-links{display:flex;gap:18px;align-items:center}
-    .nav-links a{font-size:14px;color:var(--white);opacity:.95;padding:8px 6px}
-    .nav-cta{display:flex;gap:12px;align-items:center}
-    .phone{display:flex;gap:8px;align-items:center;background:rgba(255,255,255,0.03);padding:8px 12px;border-radius:8px;font-weight:700}
-    .order-btn{background:var(--accent);color:#111;padding:10px 14px;border-radius:8px;font-weight:800;border:0;cursor:pointer}
-    .menu-toggle{display:none;background:transparent;border:0;color:var(--white);font-size:20px;padding:8px}
-    @media (max-width:820px){
-      .nav-links{display:none;position:absolute;left:0;right:0;top:74px;background:#0b0b0b;flex-direction:column;padding:12px;border-top:1px solid rgba(255,255,255,0.03);z-index:900}
-      .nav-links.show{display:flex}
-      .menu-toggle{display:block}
-    }
+<style>
+:root{
+  --bg:#0f0f10;
+  --panel:#111;
+  --muted:#b5b5b5;
+  --accent:#ff7a00;
+  --white:#fff;
+  --card-bg:#fff;
+  --card-border:#e6e6e6;
+  font-family: Arial, sans-serif;
+}
 
-    /* HERO */
-    .hero{display:flex;gap:24px;align-items:center;padding:36px 0;background-image:linear-gradient(180deg,rgba(0,0,0,0.35),rgba(0,0,0,0.65))}
-    .hero-left{flex:1}
-    .eyebrow{color:var(--accent);font-weight:800;margin-bottom:10px}
-    .hero h1{font-size:38px;line-height:1;margin:0 0 12px}
-    .hero p{color:var(--muted);margin:0 0 18px}
-    .hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
-    .btn-primary{background:var(--accent);color:#111;border:0;padding:10px 14px;border-radius:8px;font-weight:800;cursor:pointer}
-    .btn-secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 12px;border-radius:8px;color:#fff;cursor:pointer}
-    .hero-right{width:480px;max-width:44%;min-width:260px}
-    .hero-right img{width:100%;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.7);display:block}
-    @media (max-width:980px){
-      .hero{flex-direction:column}
-      .hero-right{max-width:520px;width:100%}
-      .hero h1{font-size:30px}
-    }
+*{
+  box-sizing:border-box;
+}
 
-    /* GENERIC SECTIONS */
-    .section{padding:34px 0;background:linear-gradient(180deg,rgba(255,255,255,0.02), rgba(0,0,0,0.02))}
-    .section h2{font-size:28px;margin:0 0 8px}
-    .section .subtitle{color:var(--muted)}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--white);
+}
 
-    /* MENU HEADER + TABS + GRID */
-    .menu-header{
-    margin-top:18px;
-    padding:28px 18px;
-    background:radial-gradient(circle at top, #2b2b2b 0, #111 55%, #000 100%);
-    color:var(--white);
-    text-align:center;
-    border-radius:6px 6px 0 0;
-    border-bottom:6px solid #111;
-    }
+.container{
+  max-width:1180px;
+  margin:auto;
+  padding:0 18px;
+}
 
+/* NAV */
 
+.topbar{
+  background:#070707;
+  border-bottom:3px solid #0b6bd6;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
 
-    .menu-header h2{margin:0;font-size:34px}
-    .menu-header h2 span{color:var(--accent)}
-    .menu-header p{color:var(--muted);margin-top:6px}
-    .tabs{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-start;padding:16px;background:var(--card-bg);border-bottom:1px solid var(--card-border);}
-    .tab{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:8px;border:1px solid #ddd;background:transparent;color:#222;cursor:pointer;font-weight:700}
-    .tab.active{background:var(--accent);color:#111;border-color:var(--accent);box-shadow:0 6px 18px rgba(224,94,0,0.12)}
-    .tab img{width:22px;height:22px;display:block}
-    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding:22px;background:#fff;border-radius:0 0 6px 6px;color:#111}
-    .card{background:#fff;border:1px solid var(--card-border);padding:14px;border-radius:6px;display:flex;flex-direction:column;align-items:stretch}
-    .card .img-wrap{height:120px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
-    .card img{max-width:100%;max-height:100%;object-fit:contain}
-    .card h3{font-size:14px;margin:0 0 6px;text-transform:uppercase}
-    .card p.desc{font-size:12px;color:#666;margin:0 0 10px;min-height:36px}
-    .price{font-weight:900;color:var(--accent);font-size:16px;margin-bottom:10px}
-    .empty{padding:40px;text-align:center;color:#666}
-    @media (max-width:1100px){ .grid{grid-template-columns:repeat(3,1fr)} }
-    @media (max-width:820px){ .grid{grid-template-columns:repeat(2,1fr)} .tabs{justify-content:center} }
-    @media (max-width:520px){ .grid{grid-template-columns:repeat(1,1fr)} .menu-header h2{font-size:24px} }
+.nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 0;
+}
 
-    /* MODAL DETALLE PRODUCTO */
-    .modal-back{position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:none;align-items:center;justify-content:center;padding:18px;z-index:1200}
-    .modal-detail{background:#151515;color:#fff;border-radius:8px;max-width:1100px;width:100%;display:flex;gap:18px;padding:18px;align-items:flex-start}
-    .md-left{width:50%;min-width:320px}
-    .md-main-img{position:relative;background:#0b0b0b;border-radius:8px;overflow:hidden;height:360px;display:flex;align-items:center;justify-content:center}
-    .md-main-img img{max-width:100%;max-height:100%;object-fit:contain}
-    .md-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);border:0;color:#fff;font-size:28px;padding:6px 10px;border-radius:6px;cursor:pointer}
-    .md-prev{left:8px} .md-next{right:8px}
-    .md-thumbs{display:flex;gap:8px;overflow-x:auto;padding-top:10px}
-    .md-thumbs img{width:88px;height:64px;object-fit:cover;border-radius:6px;cursor:pointer;border:2px solid transparent}
-    .md-thumbs img.active{border-color:var(--accent)}
-    .md-right{flex:1;min-width:300px}
-    .md-breadcrumb{color:var(--muted);font-size:13px;margin-bottom:6px}
-    .md-category{color:var(--accent);font-weight:800;margin-bottom:6px}
-    .md-ingredients{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 12px}
-    .ing{display:flex;gap:8px;align-items:center;background:rgba(255,255,255,0.03);padding:8px;border-radius:8px;font-size:13px}
-    .md-price-row{display:flex;align-items:center;gap:16px}
-    .md-price{font-weight:900;color:var(--accent);font-size:22px}
-    .md-sizes{display:flex;gap:8px;flex-wrap:wrap}
-    .size-btn{padding:8px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:transparent;cursor:pointer;font-weight:800;color:#fff}
-    .size-btn.active{background:var(--accent);color:#111;border-color:var(--accent)}
-    .md-qty{display:inline-flex;align-items:center;gap:8px;margin-top:12px}
-    .md-qty button{width:36px;height:36px;border-radius:6px;border:0;background:#222;color:#fff;font-size:20px;cursor:pointer}
-    .md-qty input{width:56px;text-align:center;padding:8px;border-radius:6px;border:1px solid #222;background:#0b0b0b;color:#fff}
-    .btn-fav{background:transparent;border:1px solid rgba(255,255,255,0.08);color:#fff;padding:8px 12px;border-radius:8px;cursor:pointer}
-    .md-related{display:flex;gap:12px;overflow-x:auto;padding-top:6px}
-    .related-card{min-width:150px;background:#0e0e0e;padding:10px;border-radius:8px;text-align:center}
-    .related-card img{width:100%;height:80px;object-fit:cover;border-radius:6px}
-    .related-card .rtitle{font-size:13px;margin:8px 0 6px;color:#fff}
-    .related-card .rprice{color:var(--accent);font-weight:900}
-    @media (max-width:980px){ .modal-detail{flex-direction:column} .md-left,.md-right{width:100%} .md-main-img{height:280px} }
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
 
-    /* CHECKOUT / CARRITO */
-    .step-panel{background:rgba(255,255,255,0.02);padding:16px;border-radius:8px;margin-bottom:12px}
+.logo{
+  width:60px;
+  height:60px;
+  overflow:hidden;
+  border-radius:8px;
+}
 
-    /* MAP + PROMOS TIMER */
-    #mapPlaceholder{background-image:linear-gradient(45deg,rgba(255,255,255,0.02) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.02) 50%, rgba(255,255,255,0.02) 75%, transparent 75%, transparent);background-size:40px 40px}
-    #promoTimer{font-size:20px;color:var(--accent);letter-spacing:1px}
+.logo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
 
-    /* FORM INPUTS genéricos */
-    input, textarea{background:#0b0b0b;border:1px solid #222;color:#fff;padding:10px;border-radius:8px;width:100%}
+.nav-links{
+  display:flex;
+  gap:16px;
+}
 
-    /* PAGO */
-    .pay-method{background:#111;padding:10px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);cursor:pointer;font-weight:800}
-    .pay-method.active{border-color:var(--accent);box-shadow:0 8px 22px rgba(224,94,0,0.08)}
-    .pay-panel{background:transparent;padding:8px 0}
+.nav-links a{
+  color:white;
+  text-decoration:none;
+  font-weight:bold;
+}
 
-    /* FOOTER */
-    footer{padding:22px 0;margin-top:18px;border-top:1px solid rgba(255,255,255,0.03);color:var(--muted);text-align:center;font-size:13px}
-  </style>
-</head>
-<body>
-  <!-- NAV -->
-  <div class="topbar">
-    <div class="container nav">
-      <div class="brand">
-        <div class="logo">
-          <!-- logo.png en la misma carpeta que index.html -->
-          <img src="logo.png" alt="Vikingos" class="logo-img">
-        </div>
-        <div>
-          <div style="font-weight:800">Vikingos</div>
-          <div style="font-size:12px;color:var(--muted)">Pizzas & Comidas</div>
-        </div>
-      </div>
-      <button class="menu-toggle" id="menuToggle">☰</button>
-      <nav class="nav-links" id="navLinks">
-        <a href="#inicio" data-scroll>INICIO</a>
-        <a href="#menu" data-scroll>MENU</a>
-        <a href="#promociones" data-scroll>PROMOCIONES</a>
-        <a href="#nosotros" data-scroll>NOSOTROS</a>
-        <a href="#contacto-full" data-scroll>CONTACTO</a>
-        <a href="#cartCheckout" data-scroll>CARRITO</a>
-      </nav>
-      <div class="nav-cta">
-        <a class="phone" href="tel:+573003163521">
-          <span style="font-size:13px">Pídelo ahora</span>
-          <strong style="margin-left:6px">300 316 35 21</strong>
-        </a>
-        <button class="order-btn" id="orderNow">ORDENAR AHORA</button>
-      </div>
-    </div>
-  </div>
+.order-btn{
+  background:var(--accent);
+  border:none;
+  padding:10px 16px;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
 
-  <main id="inicio" class="container">
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-left">
-        <div class="eyebrow">LAS MEJORES</div>
-        <h1>PIZZAS Y COMIDAS DE SOACHA PARA COMPARTIR</h1>
-        <p>Ingredientes frescos, sabor único y la mejor atención. Haz tu pedido y disfrútalo.</p>
-        <div class="ctas">
-          <button class="btn-primary" id="ctaOrder">Ordenar ahora</button>
-          <button class="btn-secondary" id="ctaDelivery">Pedido a domicilio</button>
-        </div>
-      </div>
-      <div class="hero-right">
-        <img src="https://images.unsplash.com/photo-1601924582971-d4a3d3f88f31?auto=format&fit=crop&w=900&q=80" alt="Pizza Vikingos">
-      </div>
-    </section>
+/* HERO */
 
-    <!-- MENU + PRODUCTOS -->
-    <section id="menu">
-      <header class="menu-header">
-        <h2>NUESTRO <span>MENÚ</span></h2>
-        <p>Explora nuestras opciones y elige tu favorita</p>
-      </header>
+.hero{
+  display:flex;
+  align-items:center;
+  gap:30px;
+  padding:40px 0;
+}
 
-      <div class="tab active" data-cat="pizzas">
-        <img src="https://img.icons8.com/color/48/pizza.png" alt="Pizzas">
-        PIZZAS
-      </div>
-      <div class="tab" data-cat="hamburguesas">
-        <img src="https://img.icons8.com/color/48/hamburger.png" alt="Hamburguesas">
-        HAMBURGUESAS
-      </div>
-      <div class="tab" data-cat="perros">
-        <img src="https://img.icons8.com/color/48/hot-dog.png" alt="Perros">
-        PERROS
-      </div>
-      <div class="tab" data-cat="combos">
-        <img src="https://img.icons8.com/color/48/meal.png" alt="Combos">
-        COMBOS
-      </div>
-      <div class="tab" data-cat="bebidas">
-        <img src="https://img.icons8.com/color/48/soda-bottle.png" alt="Bebidas">
-        BEBIDAS
-      </div>
+.hero-left{
+  flex:1;
+}
 
+.hero-right{
+  flex:1;
+}
 
+.hero-right img{
+  width:100%;
+  border-radius:12px;
+}
 
-      <section id="productsSection">
-        <div class="grid" id="productsGrid"></div>
-      </section>
-    </section>
+.hero h1{
+  font-size:42px;
+  margin:10px 0;
+}
 
-    <!-- MODAL DETALLE PRODUCTO -->
-    <div class="modal-back" id="modalBack" aria-hidden="true">
-      <div class="modal-detail" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-        <div class="md-left">
-          <div class="md-main-img">
-            <button class="md-nav md-prev" id="mdPrev">‹</button>
-            <img id="modalImg" src="" alt="">
-            <button class="md-nav md-next" id="mdNext">›</button>
-          </div>
-          <div class="md-thumbs" id="mdThumbs"></div>
-        </div>
+.hero p{
+  color:var(--muted);
+}
 
-        <div class="md-right">
-          <nav class="md-breadcrumb">INICIO › MENÚ › PIZZAS › <strong id="modalCrumb">Producto</strong></nav>
-          <h2 id="modalTitle">Título Producto</h2>
-          <div class="md-category">PIZZA</div>
+.btn-primary{
+  background:var(--accent);
+  border:none;
+  padding:12px 18px;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
 
-          <div class="md-ingredients" id="mdIngredients"></div>
+.btn-secondary{
+  background:transparent;
+  border:1px solid white;
+  color:white;
+  padding:12px 18px;
+  border-radius:8px;
+  cursor:pointer;
+}
 
-          <div class="md-price-row">
-            <div class="md-price" id="modalPrice">$0</div>
-            <div class="md-sizes" id="mdSizes"></div>
-          </div>
+/* MENU */
 
-          <div class="md-qty">
-            <button id="qtyMinus">−</button>
-            <input id="qtyInput" type="number" value="1" min="1">
-            <button id="qtyPlus">+</button>
-          </div>
+.menu-header{
+  text-align:center;
+  padding:30px 20px;
+  background:#111;
+  border-radius:10px 10px 0 0;
+}
 
-          <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
-            <button class="btn-primary" id="modalAdd">AGREGAR AL CARRITO</button>
-            <button class="btn-fav" id="modalFav">❤ AGREGAR A FAVORITOS</button>
-          </div>
+.menu-header h2{
+  margin:0;
+  font-size:36px;
+}
 
-          <h3 style="margin-top:18px;margin-bottom:8px;font-size:16px;color:#fff">TAMBIÉN TE PUEDE GUSTAR</h3>
-          <div class="md-related" id="mdRelated"></div>
-        </div>
-      </div>
-    </div>
+.menu-header span{
+  color:var(--accent);
+}
 
-    <!-- NOSOTROS -->
-    <section id="nosotros" class="section">
-      <div class="container">
-        <h2>SOBRE NOSOTROS</h2>
-        <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start">
-          <div style="flex:1;min-width:320px;color:var(--muted)">
-            <h3>Nuestra historia</h3>
-            <p>Contamos con un equipo apasionado que trabaja cada día para preparar pizzas únicas, con masa fresca, salsas artesanales e ingredientes seleccionados especialmente para ti. Gracias por ser parte de nuestra familia.</p>
+.tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  padding:16px;
+  background:white;
+}
 
-            <h4>Misión</h4>
-            <p>Ofrecer las mejores pizzas y comidas con ingredientes frescos y servicio cercano.</p>
+.tab{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid #ddd;
+  padding:10px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  color:black;
+  font-weight:bold;
+}
 
-            <h4>Visión</h4>
-            <p>Ser la pizzería líder en Soacha por calidad, innovación y atención al cliente.</p>
+.tab.active{
+  background:var(--accent);
+  color:black;
+}
 
-            <h4>Nuestros valores</h4>
-            <ul>
-              <li>Pasión por la calidad</li>
-              <li>Frescura e ingredientes seleccionados</li>
-              <li>Honestidad y servicio</li>
-            </ul>
+.tab img{
+  width:24px;
+}
 
-            <div style="margin-top:12px;background:#0e0e0e;padding:10px;border-radius:8px">
-              <strong>Dirección</strong>
-              <div style="color:var(--muted)">Cra. X # Y, Soacha, Cundinamarca</div>
-              <div style="margin-top:6px"><strong>Horario:</strong> Lun - Dom: 11:00am - 11:00pm</div>
-            </div>
-          </div>
+/* GRID */
 
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+  background:white;
+  padding:20px;
+  border-radius:0 0 10px 10px;
+}
 
+.card{
+  background:white;
+  border:1px solid #ddd;
+  border-radius:8px;
+  padding:14px;
+  color:black;
+  display:flex;
+  flex-direction:column;
+}
 
+.card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:8px;
+}
 
+.card h3{
+  margin:12px 0 8px;
+}
 
-          
-          <div style="width:420px;min-width:260px">
-           <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=80" alt="Nosotros" style="width:100%;border-radius:10px;display:block;margin-bottom:12px">
-            <div style="background:#0e0e0e;padding:12px;border-radius:8px">
-              <h4 style="margin:0;color:var(--accent)">Hecho con pasión</h4>
-              <p style="color:var(--muted);margin:6px 0 0">Compartimos nuestra receta y valores con cada cliente.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+.price{
+  color:var(--accent);
+  font-size:20px;
+  font-weight:bold;
+  margin:10px 0;
+}
 
-    <!-- CONTACTO -->
-    <section id="contacto-full" class="section">
-      <div class="container" style="max-width:1100px">
-        <h2>CONTACTA NOS</h2>
-        <div style="display:flex;gap:18px;flex-wrap:wrap">
-          <div style="flex:1;min-width:320px">
-            <form id="contactFormFull" style="display:flex;flex-direction:column;gap:8px">
-              <input name="name" placeholder="Nombre completo" required>
-              <input name="email" type="email" placeholder="Correo electrónico" required>
-              <input name="phone" placeholder="Teléfono / WhatsApp" required>
-              <input name="subject" placeholder="Asunto">
-              <textarea name="message" rows="5" placeholder="Mensaje" required></textarea>
-             <div style="display:flex;gap:8px;flex-wrap:wrap">
-                <button class="btn-primary" type="submit">ENVIAR MENSAJE</button>
-                <button class="btn-secondary" type="button" id="openMapBtn">VER EN EL MAPA</button>
-              </div>
-            </form>
+.card-buttons{
+  display:flex;
+  gap:8px;
+}
 
-            <div style="margin-top:12px;background:#0e0e0e;padding:12px;border-radius:8px">
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <div>
-                  <div style="font-weight:800">Medios de contacto</div>
-                  <div style="color:var(--muted);margin-top:6px">WhatsApp: <strong>300 316 35 21</strong></div>
-                  <div style="color:var(--muted);margin-top:6px">Tel: <strong>300 316 35 21</strong></div>
-                </div>
-                <div style="text-align:right;color:var(--muted)">
-                  <div>Horario</div>
-                  <div style="font-weight:700">11:00am - 11:00pm</div>
-                </div>
-              </div>
-            </div>
-          </div>
+.card-buttons button{
+  flex:1;
+}
 
-          <aside style="width:380px;min-width:260px">
-            <div style="background:#0e0e0e;padding:12px;border-radius:8px">
-              <h4 style="margin:0 0 8px">¿Dónde estamos?</h4>
-              <div id="mapPlaceholder" style="height:230px;background:#0b0b0b;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted)">
-                MAPA (inserta iframe de Google Maps o URL)
-              </div>
-            </div>
-          </aside>
-        </div>
-      </div>
-    </section>
+/* NOSOTROS */
 
-    <!-- AQUÍ IRÍAN TAMBIÉN: sección PROMOCIONES y sección CARRITO/CHECKOUT si aún no las pegaste -->
+.section{
+  padding:50px 0;
+}
 
-    <footer>
-      © 2026 Vikingos - Demo
-    </footer>
-  </main>
-    <script>
-    // 1) Datos de productos
-const PRODUCTS = [
-  {
-    id:1, cat:'pizzas',
-    title:'Pizza Pepperoni',
-    desc:'Pepperoni, queso mozzarella y salsa de la casa.',
-    price:28900,
-    img:'https://images.unsplash.com/photo-1601924582971-d4a3d3f88f31?auto=format&fit=crop&w=600&q=80',
-    gallery:[
-      'https://images.unsplash.com/photo-1601924582971-d4a3d3f88f31?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1548365328-9c1e5a4f7c37?auto=format&fit=crop&w=600&q=80'
-    ],
-    ingredients:['pepperoni','mozzarella','salsa'],
-    sizes:{ 'Pequeña (20cm)':25900, 'Mediana (30cm)':28900, 'Grande (35cm)':32900 }
-  },
-  {
-    id:2, cat:'pizzas',
-    title:'Pizza Hawaiana',
-    desc:'Jamón, piña, queso mozzarella y salsa de la casa.',
-    price:28900,
-    img:'https://images.unsplash.com/photo-1601924898351-9ce0c31841ff?auto=format&fit=crop&w=600&q=80',
-    gallery:[
-      'https://images.unsplash.com/photo-1601924898351-9ce0c31841ff?auto=format&fit=crop&w=600&q=80'
-    ],
-    ingredients:['jamon','piña','mozzarella','salsa'],
-    sizes:{ 'Mediana (30cm)':28900, 'Grande (35cm)':32900 }
-  },
-  {
-    id:3, cat:'pizzas',
-    title:'Pizza Vikinga Suprema',
-    desc:'Pepperoni, jamón, chorizo, carne y queso.',
-    price:33900,
-    img:'https://images.unsplash.com/photo-1548365328-9c1e5a4f7c37?auto=format&fit=crop&w=600&q=80',
-    gallery:[
-      'https://images.unsplash.com/photo-1548365328-9c1e5a4f7c37?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1548367898-65d274cd6669?auto=format&fit=crop&w=600&q=80'
-    ],
-    ingredients:['pepperoni','jamon','carne','chorizo','mozzarella'],
-    sizes:{ 'Mediana (30cm)':33900, 'Grande (35cm)':37900 }
-  },
-  {
-    id:4, cat:'hamburguesas',
-    title:'Hamburguesa Clásica',
-    desc:'Carne, lechuga, tomate y queso.',
-    price:15900,
-    img:'https://images.unsplash.com/photo-1550317138-10000687a72b?auto=format&fit=crop&w=600&q=80'
-  },
-  {
-    id:5, cat:'perros',
-    title:'Perro Clásico',
-    desc:'Salchicha, kétchup y mostaza.',
-    price:8900,
-    img:'https://images.unsplash.com/photo-1509410103747-0e5b1d8f8c02?auto=format&fit=crop&w=600&q=80'
-  },
-  {
-    id:6, cat:'combos',
-    title:'Combo Familiar',
-    desc:'2 pizzas medianas + gaseosa 2L.',
-    price:64900,
-    img:'https://images.unsplash.com/photo-1593560708920-61dd98c46a3d?auto=format&fit=crop&w=600&q=80'
-  },
-  {
-    id:7, cat:'bebidas',
-    title:'Coca-Cola 500ml',
-    desc:'Bebida gaseosa fría.',
-    price:4500,
-    img:'https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=600&q=80'
+.section h2{
+  font-size:32px;
+}
+
+.about{
+  display:flex;
+  gap:30px;
+  flex-wrap:wrap;
+}
+
+.about img{
+  width:100%;
+  border-radius:10px;
+}
+
+/* CONTACTO */
+
+.contact-box{
+  display:flex;
+  gap:30px;
+  flex-wrap:wrap;
+}
+
+form{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  flex:1;
+}
+
+input,
+textarea{
+  padding:12px;
+  border-radius:8px;
+  border:none;
+  background:#111;
+  color:white;
+}
+
+.map{
+  flex:1;
+  min-height:300px;
+}
+
+.map iframe{
+  width:100%;
+  height:100%;
+  border:none;
+  border-radius:10px;
+}
+
+/* FOOTER */
+
+footer{
+  text-align:center;
+  padding:30px;
+  border-top:1px solid #222;
+  color:var(--muted);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+  .hero{
+    flex-direction:column;
   }
+
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:600px){
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .nav{
+    flex-direction:column;
+    gap:14px;
+  }
+
+  .nav-links{
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+
+<div class="topbar">
+  <div class="container nav">
+
+    <div class="brand">
+      <div class="logo">
+        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=200" alt="">
+      </div>
+
+      <div>
+        <strong>Vikingos</strong>
+        <div style="font-size:12px;color:#bbb">
+          Pizzas & Comidas
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      <a href="#inicio">Inicio</a>
+      <a href="#menu">Menú</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+
+    <button class="order-btn">
+      ORDENAR
+    </button>
+
+  </div>
+</div>
+
+<!-- HERO -->
+
+<div class="container">
+
+<section class="hero" id="inicio">
+
+<div class="hero-left">
+
+<div style="color:orange;font-weight:bold">
+LAS MEJORES
+</div>
+
+<h1>
+PIZZAS Y COMIDAS DE SOACHA
+</h1>
+
+<p>
+Ingredientes frescos, sabor único y atención rápida.
+</p>
+
+<div style="display:flex;gap:10px;flex-wrap:wrap">
+
+<button class="btn-primary">
+Ordenar Ahora
+</button>
+
+<button class="btn-secondary">
+Domicilios
+</button>
+
+</div>
+
+</div>
+
+<div class="hero-right">
+
+<img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=900" alt="Pizza">
+
+</div>
+
+</section>
+
+<!-- MENU -->
+
+<section id="menu">
+
+<div class="menu-header">
+<h2>
+NUESTRO <span>MENÚ</span>
+</h2>
+
+<p>
+Explora nuestras mejores opciones
+</p>
+</div>
+
+<div class="tabs">
+
+<div class="tab active">
+<img src="https://img.icons8.com/color/48/pizza.png">
+PIZZAS
+</div>
+
+<div class="tab">
+<img src="https://img.icons8.com/color/48/hamburger.png">
+HAMBURGUESAS
+</div>
+
+<div class="tab">
+<img src="https://img.icons8.com/color/48/hot-dog.png">
+PERROS
+</div>
+
+<div class="tab">
+<img src="https://img.icons8.com/color/48/meal.png">
+COMBOS
+</div>
+
+<div class="tab">
+<img src="https://img.icons8.com/color/48/soda-bottle.png">
+BEBIDAS
+</div>
+
+</div>
+
+<div class="grid" id="productsGrid">
+
+</div>
+
+</section>
+
+<!-- NOSOTROS -->
+
+<section class="section" id="nosotros">
+
+<h2>
+SOBRE NOSOTROS
+</h2>
+
+<div class="about">
+
+<div style="flex:1;min-width:300px">
+
+<p style="color:#bbb">
+Somos una pizzería apasionada por el sabor y la calidad.
+Trabajamos cada día para ofrecer la mejor experiencia.
+</p>
+
+<ul>
+<li>Ingredientes frescos</li>
+<li>Atención rápida</li>
+<li>Precios accesibles</li>
+</ul>
+
+</div>
+
+<div style="flex:1;min-width:300px">
+
+<img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=900">
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTACTO -->
+
+<section class="section" id="contacto">
+
+<h2>
+CONTÁCTANOS
+</h2>
+
+<div class="contact-box">
+
+<form>
+
+<input type="text" placeholder="Nombre">
+
+<input type="email" placeholder="Correo">
+
+<input type="text" placeholder="Teléfono">
+
+<textarea rows="5" placeholder="Mensaje"></textarea>
+
+<button class="btn-primary">
+Enviar
+</button>
+
+</form>
+
+<div class="map">
+
+<iframe src="https://www.google.com/maps?q=Soacha&output=embed"></iframe>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+<footer>
+© 2026 Vikingos - Todos los derechos reservados
+</footer>
+
+<script>
+
+const PRODUCTS = [
+
+{
+title:'Pizza Pepperoni',
+desc:'Pepperoni y queso mozzarella.',
+price:'$28.900',
+img:'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600'
+},
+
+{
+title:'Pizza Hawaiana',
+desc:'Jamón, piña y queso.',
+price:'$29.900',
+img:'https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=600'
+},
+
+{
+title:'Hamburguesa Clásica',
+desc:'Carne, queso y vegetales.',
+price:'$15.900',
+img:'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600'
+},
+
+{
+title:'Perro Especial',
+desc:'Salchicha, papas y salsas.',
+price:'$12.900',
+img:'https://images.unsplash.com/photo-1619740455993-9e612b1af08a?w=600'
+},
+
+{
+title:'Combo Familiar',
+desc:'2 pizzas + gaseosa.',
+price:'$64.900',
+img:'https://images.unsplash.com/photo-1520201163981-8cc95007dd2e?w=600'
+},
+
+{
+title:'Coca Cola',
+desc:'Bebida 500ml.',
+price:'$4.500',
+img:'https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=600'
+}
+
 ];
 
-const fmtCOP = v => v.toLocaleString('es-CO',{style:'currency',currency:'COP',maximumFractionDigits:0});
-
-// 2) Menú móvil y scroll suave
-const menuToggle = document.getElementById('menuToggle');
-const navLinks = document.getElementById('navLinks');
-
-menuToggle.addEventListener('click', ()=> navLinks.classList.toggle('show'));
-
-document.querySelectorAll('[data-scroll]').forEach(a=>{
-  a.addEventListener('click', e=>{
-    e.preventDefault();
-    const href = a.getAttribute('href');
-    const el = document.querySelector(href);
-    if(el){
-      window.scrollTo({top: el.getBoundingClientRect().top + window.scrollY - 70, behavior:'smooth'});
-    }
-    navLinks.classList.remove('show');
-  });
-});
-
-// Botones "Ordenar ahora" → WhatsApp
-const phone = '+573003163521';
-function openOrder(){
-  const url = 'https://wa.me/' + phone.replace(/\D/g,'') +
-    '?text=' + encodeURIComponent('Hola, quiero hacer un pedido en Vikingos.');
-  window.open(url, '_blank');
-}
-document.getElementById('orderNow').addEventListener('click', openOrder);
-document.getElementById('ctaOrder').addEventListener('click', openOrder);
-
-// "Pedido a domicilio" → baja a contacto
-document.getElementById('ctaDelivery').addEventListener('click', ()=>{
-  const el = document.getElementById('contacto-full');
-  if(el) window.scrollTo({top: el.offsetTop - 70, behavior:'smooth'});
-});
-
-// 3) Tabs de categorías y render de productos
-const tabs = document.querySelectorAll('.tab');
 const grid = document.getElementById('productsGrid');
 
-function renderCategory(cat){
-  grid.innerHTML = '';
-  const items = PRODUCTS.filter(p=>p.cat === cat);
-  if(items.length === 0){
-    grid.innerHTML = '<div class="empty">No hay productos en esta categoría.</div>';
-    return;
-  }
-  items.forEach(p=>{
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML = `
-      <div class="img-wrap"><img src="${p.img}" alt="${p.title}"></div>
-      <h3>${p.title}</h3>
-      <p class="desc">${p.desc}</p>
-      <div class="price">${fmtCOP(p.price)}</div>
-      <div style="margin-top:auto;display:flex;gap:6px">
-        <button class="btn-primary" data-id="${p.id}">VER DETALLE</button>
-        <button class="btn-secondary" data-add="${p.id}">AÑADIR</button>
-      </div>
-    `;
-    grid.appendChild(card);
-  });
-}
+PRODUCTS.forEach(product=>{
 
-function setActiveTab(el){
-  tabs.forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
-  renderCategory(el.dataset.cat);
-}
+const card = document.createElement('div');
 
-tabs.forEach(t=> t.addEventListener('click', ()=> setActiveTab(t)));
-setActiveTab(document.querySelector('.tab.active') || tabs[0]);
+card.className = 'card';
 
-// 4) Modal detalle producto
-const ING_ICONS = {
-  pepperoni:'🌶️', jamon:'🍖', carne:'🥩', chorizo:'🌭', piña:'🍍',
-  mozzarella:'🧀', salsa:'🍅'
-};
+card.innerHTML = `
 
-let mdIndex = 0;
-let mdGallery = [];
-let mdCurrentProduct = null;
-let selectedSize = null;
+<img src="${product.img}" alt="${product.title}">
 
-const modalBack = document.getElementById('modalBack');
-const modalImg = document.getElementById('modalImg');
-const modalTitle = document.getElementById('modalTitle');
-const modalCrumb = document.getElementById('modalCrumb');
-const modalPrice = document.getElementById('modalPrice');
-const mdThumbs = document.getElementById('mdThumbs');
-const mdIngredients = document.getElementById('mdIngredients');
-const mdSizes = document.getElementById('mdSizes');
-const qtyInput = document.getElementById('qtyInput');
-const qtyMinus = document.getElementById('qtyMinus');
-const qtyPlus = document.getElementById('qtyPlus');
-const mdPrev = document.getElementById('mdPrev');
-const mdNext = document.getElementById('mdNext');
-const mdRelated = document.getElementById('mdRelated');
-const modalAdd = document.getElementById('modalAdd');
-const modalFav = document.getElementById('modalFav');
+<h3>${product.title}</h3>
 
-function openDetail(product){
-  mdCurrentProduct = product;
-  modalTitle.textContent = product.title;
-  modalCrumb.textContent = product.title;
+<p>${product.desc}</p>
 
-  mdGallery = product.gallery && product.gallery.length ? product.gallery : [product.img];
-  mdIndex = 0;
-  renderGallery();
+<div class="price">${product.price}</div>
 
-  renderIngredients(product.ingredients || []);
-  renderSizes(product.sizes || { 'Mediana (30cm)': product.price });
+<div class="card-buttons">
 
-  qtyInput.value = 1;
-  renderRelated(product);
+<button class="btn-primary">
+VER
+</button>
 
-  modalBack.style.display = 'flex';
-  modalBack.setAttribute('aria-hidden','false');
-}
+<button class="btn-secondary">
+AÑADIR
+</button>
 
-function renderGallery(){
-  modalImg.src = mdGallery[mdIndex];
-  mdThumbs.innerHTML = '';
-  mdGallery.forEach((src,i)=>{
-    const img = document.createElement('img');
-    img.src = src; img.dataset.i = i;
-    if(i===mdIndex) img.classList.add('active');
-    img.addEventListener('click', ()=>{ mdIndex = i; renderGallery(); });
-    mdThumbs.appendChild(img);
-  });
-}
-mdPrev.addEventListener('click', ()=>{ mdIndex = (mdIndex-1+mdGallery.length)%mdGallery.length; renderGallery(); });
-mdNext.addEventListener('click', ()=>{ mdIndex = (mdIndex+1)%mdGallery.length; renderGallery(); });
+</div>
 
-function renderIngredients(list){
-  mdIngredients.innerHTML = '';
-  list.forEach(key=>{
-    const div = document.createElement('div');
-    div.className = 'ing';
-    const icon = ING_ICONS[key] || '🍕';
-    div.innerHTML = `<span>${icon}</span><span>${key.charAt(0).toUpperCase()+key.slice(1)}</span>`;
-    mdIngredients.appendChild(div);
-  });
-}
+`;
 
-function renderSizes(sizes){
-  mdSizes.innerHTML = '';
-  const labels = Object.keys(sizes);
-  if(!labels.length){
-    selectedSize = {label:'Única', price:mdCurrentProduct.price};
-    modalPrice.textContent = fmtCOP(selectedSize.price);
-    return;
-  }
-  labels.forEach((label,i)=>{
-    const btn = document.createElement('button');
-    btn.className = 'size-btn' + (i===0 ? ' active':'');
-    btn.textContent = label;
-    if(i===0) selectedSize = {label, price:sizes[label]};
-    btn.addEventListener('click', ()=>{
-      document.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      selectedSize = {label, price:sizes[label]};
-      modalPrice.textContent = fmtCOP(selectedSize.price);
-    });
-    mdSizes.appendChild(btn);
-  });
-  modalPrice.textContent = fmtCOP(selectedSize.price);
-}
+grid.appendChild(card);
 
-qtyMinus.addEventListener('click', ()=>{ qtyInput.value = Math.max(1, Number(qtyInput.value)-1); });
-qtyPlus.addEventListener('click', ()=>{ qtyInput.value = Number(qtyInput.value)+1; });
-
-function renderRelated(product){
-  mdRelated.innerHTML = '';
-  const others = PRODUCTS.filter(p=>p.id!==product.id && p.cat===product.cat).slice(0,6);
-  others.forEach(p=>{
-    const rc = document.createElement('div'); rc.className='related-card';
-    rc.innerHTML = `
-      <img src="${p.img}" alt="${p.title}">
-      <div class="rtitle">${p.title}</div>
-      <div class="rprice">${fmtCOP(p.price)}</div>
-      <div style="margin-top:6px"><button class="btn-primary" data-id="${p.id}">VER</button></div>
-    `;
-    mdRelated.appendChild(rc);
-  });
-}
-mdRelated.addEventListener('click', e=>{
-  const btn = e.target.closest('button[data-id]');
-  if(!btn) return;
-  const id = Number(btn.dataset.id);
-  const p = PRODUCTS.find(x=>x.id===id);
-  if(p) openDetail(p);
 });
 
-function closeDetail(){
-  modalBack.style.display='none';
-  modalBack.setAttribute('aria-hidden','true');
-}
-modalBack.addEventListener('click', e=>{ if(e.target===modalBack) closeDetail(); });
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeDetail(); });
+</script>
 
-// Desde la grilla: "VER DETALLE"
-grid.addEventListener('click', e=>{
-  const btnDetail = e.target.closest('button[data-id]');
-  if(btnDetail){
-    const id = Number(btnDetail.dataset.id);
-    const product = PRODUCTS.find(p=>p.id===id);
-    if(product) openDetail(product);
-  }
-});
-
-// 5) Carrito
-const CART = [];
-const cartItemsEl = document.getElementById('cartItems');
-const summaryList = document.getElementById('summaryList');
-const summarySubtotal = document.getElementById('summarySubtotal');
-const summaryShipping = document.getElementById('summaryShipping');
-const summaryTotal = document.getElementById('summaryTotal');
-
-function renderCart(){
-  if(!cartItemsEl) return; // por si aún no pegaste la sección de carrito
-  cartItemsEl.innerHTML = '';
-  summaryList.innerHTML = '';
-  let subtotal = 0;
-  CART.forEach((it, idx)=>{
-    const line = document.createElement('div');
-    line.style.display='flex';line.style.justifyContent='space-between';line.style.alignItems='center';
-    line.innerHTML = `
-      <div style="flex:1">
-        <div style="font-weight:700">${it.title}</div>
-        <div style="color:var(--muted);font-size:13px">${it.sizeLabel} · x${it.qty}</div>
-      </div>
-      <div style="text-align:right">
-        <div style="font-weight:900;color:var(--accent)">${fmtCOP(it.price*it.qty)}</div>
-        <div style="margin-top:6px"><button class="btn-secondary" data-action="remove" data-idx="${idx}">Eliminar</button></div>
-      </div>`;
-    cartItemsEl.appendChild(line);
-
-    const sline = document.createElement('div');
-    sline.style.display='flex';sline.style.justifyContent='space-between';
-    sline.innerHTML = `<div>${it.title} <small style="color:var(--muted)">${it.qty}x</small></div><div style="font-weight:900">${fmtCOP(it.price*it.qty)}</div>`;
-    summaryList.appendChild(sline);
-
-    subtotal += it.price * it.qty;
-  });
-
-  const shipping = subtotal > 0 ? 5000 : 0;
-  summarySubtotal.textContent = fmtCOP(subtotal);
-  summaryShipping.textContent = fmtCOP(shipping);
-  summaryTotal.textContent = fmtCOP(subtotal+shipping);
-}
-if(document.getElementById('cartItems')) renderCart();
-
-// Eliminar item en carrito
-if(cartItemsEl){
-  cartItemsEl.addEventListener('click', e=>{
-    const btn = e.target.closest('button[data-action="remove"]');
-    if(!btn) return;
-    const idx = Number(btn.dataset.idx);
-    CART.splice(idx,1);
-    renderCart();
-  });
-}
-
-// Botón AÑADIR en cards
-grid.addEventListener('click', e=>{
-  const addBtn = e.target.closest('button[data-add]');
-  if(!addBtn) return;
-  const id = Number(addBtn.dataset.add);
-  const product = PRODUCTS.find(p=>p.id===id);
-  if(!product) return;
-  const existing = CART.find(i=>i.id===id && i.sizeLabel==='Mediana');
-  if(existing) existing.qty++;
-  else CART.push({id, title:product.title, price:product.price, qty:1, sizeLabel:'Mediana'});
-  renderCart();
-});
-
-// AGREGAR AL CARRITO desde modal
-modalAdd.addEventListener('click', ()=>{
-  const qty = Number(qtyInput.value) || 1;
-  const size = selectedSize ? selectedSize.label : 'Mediana';
-  const price = selectedSize ? selectedSize.price : mdCurrentProduct.price;
-  const existing = CART.find(i=>i.id===mdCurrentProduct.id && i.sizeLabel===size);
-  if(existing) existing.qty += qty;
-  else CART.push({id:mdCurrentProduct.id, title:mdCurrentProduct.title, price, qty, sizeLabel:size});
-  renderCart();
-  alert('Producto agregado al carrito.');
-  closeDetail();
-});
-
-modalFav.addEventListener('click', ()=>{
-  alert(`Favorito: ${mdCurrentProduct.title} (demo).`);
-});
-
-// 8) Contacto y mapa
-document.getElementById('contactFormFull').addEventListener('submit', e=>{
-  e.preventDefault();
-  alert('Mensaje enviado (demo). Nos pondremos en contacto pronto.');
-  e.target.reset();
-});
-
-document.getElementById('openMapBtn').addEventListener('click', ()=>{
-  const mapBox = document.getElementById('mapPlaceholder');
-  mapBox.innerHTML = '<iframe src="https://www.google.com/maps?q=Soacha&output=embed" style="width:100%;height:100%;border:0;border-radius:8px"></iframe>';
-});
-
-  </script>
 </body>
 </html>
