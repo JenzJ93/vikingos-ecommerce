@@ -299,4 +299,414 @@
               <input name="phone" placeholder="Teléfono / WhatsApp" required>
               <input name="subject" placeholder="Asunto">
               <textarea name="message" rows="5" placeholder="Mensaje" required></textarea>
-              <div style="display:flex;gap
+             <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <button class="btn-primary" type="submit">ENVIAR MENSAJE</button>
+                <button class="btn-secondary" type="button" id="openMapBtn">VER EN EL MAPA</button>
+              </div>
+            </form>
+
+            <div style="margin-top:12px;background:#0e0e0e;padding:12px;border-radius:8px">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div>
+                  <div style="font-weight:800">Medios de contacto</div>
+                  <div style="color:var(--muted);margin-top:6px">WhatsApp: <strong>300 316 35 21</strong></div>
+                  <div style="color:var(--muted);margin-top:6px">Tel: <strong>300 316 35 21</strong></div>
+                </div>
+                <div style="text-align:right;color:var(--muted)">
+                  <div>Horario</div>
+                  <div style="font-weight:700">11:00am - 11:00pm</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside style="width:380px;min-width:260px">
+            <div style="background:#0e0e0e;padding:12px;border-radius:8px">
+              <h4 style="margin:0 0 8px">¿Dónde estamos?</h4>
+              <div id="mapPlaceholder" style="height:230px;background:#0b0b0b;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted)">
+                MAPA (inserta iframe de Google Maps o URL)
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- AQUÍ IRÍAN TAMBIÉN: sección PROMOCIONES y sección CARRITO/CHECKOUT si aún no las pegaste -->
+
+    <footer>
+      © 2026 Vikingos - Demo
+    </footer>
+  </main>
+    <script>
+    // 1) Datos de productos
+const PRODUCTS = [
+  {
+    id:1, cat:'pizzas',
+    title:'Pizza Pepperoni',
+    desc:'Pepperoni, queso mozzarella y salsa de la casa.',
+    price:28900,
+    img:'images/pizza-pepperoni.jpg',
+    gallery:['images/pizza-pepperoni.jpg','images/pizza-pepperoni2.jpg'],
+    ingredients:['pepperoni','mozzarella','salsa'],
+    sizes:{ 'Pequeña (20cm)':25900, 'Mediana (30cm)':28900, 'Grande (35cm)':32900 }
+  },
+  {
+    id:2, cat:'pizzas',
+    title:'Pizza Hawaiana',
+    desc:'Jamón, piña, queso mozzarella y salsa de la casa.',
+    price:28900,
+    img:'images/pizza-hawaiana.jpg',
+    gallery:['images/pizza-hawaiana.jpg'],
+    ingredients:['jamon','piña','mozzarella','salsa'],
+    sizes:{ 'Mediana (30cm)':28900, 'Grande (35cm)':32900 }
+  },
+  {
+    id:3, cat:'pizzas',
+    title:'Pizza Vikinga Suprema',
+    desc:'Pepperoni, jamón, chorizo, carne y queso.',
+    price:33900,
+    img:'images/pizza-vikinga.jpg',
+    gallery:['images/pizza-vikinga.jpg','images/pizza-vikinga2.jpg'],
+    ingredients:['pepperoni','jamon','carne','chorizo','mozzarella'],
+    sizes:{ 'Mediana (30cm)':33900, 'Grande (35cm)':37900 }
+  },
+  {
+    id:4, cat:'hamburguesas',
+    title:'Hamburguesa Clásica',
+    desc:'Carne, lechuga, tomate y queso.',
+    price:15900,
+    img:'images/burger-classic.jpg'
+  },
+  {
+    id:5, cat:'perros',
+    title:'Perro Clásico',
+    desc:'Salchicha, kétchup y mostaza.',
+    price:8900,
+    img:'images/hotdog.jpg'
+  },
+  {
+    id:6, cat:'combos',
+    title:'Combo Familiar',
+    desc:'2 pizzas medianas + gaseosa 2L.',
+    price:64900,
+    img:'images/combo-familiar.jpg'
+  },
+  {
+    id:7, cat:'bebidas',
+    title:'Coca-Cola 500ml',
+    desc:'Bebida gaseosa fría.',
+    price:4500,
+    img:'images/drink-coke.jpg'
+  }
+];
+
+const fmtCOP = v => v.toLocaleString('es-CO',{style:'currency',currency:'COP',maximumFractionDigits:0});
+
+// 2) Menú móvil y scroll suave
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+
+menuToggle.addEventListener('click', ()=> navLinks.classList.toggle('show'));
+
+document.querySelectorAll('[data-scroll]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    e.preventDefault();
+    const href = a.getAttribute('href');
+    const el = document.querySelector(href);
+    if(el){
+      window.scrollTo({top: el.getBoundingClientRect().top + window.scrollY - 70, behavior:'smooth'});
+    }
+    navLinks.classList.remove('show');
+  });
+});
+
+// Botones "Ordenar ahora" → WhatsApp
+const phone = '+573003163521';
+function openOrder(){
+  const url = 'https://wa.me/' + phone.replace(/\D/g,'') +
+    '?text=' + encodeURIComponent('Hola, quiero hacer un pedido en Vikingos.');
+  window.open(url, '_blank');
+}
+document.getElementById('orderNow').addEventListener('click', openOrder);
+document.getElementById('ctaOrder').addEventListener('click', openOrder);
+
+// "Pedido a domicilio" → baja a contacto
+document.getElementById('ctaDelivery').addEventListener('click', ()=>{
+  const el = document.getElementById('contacto-full');
+  if(el) window.scrollTo({top: el.offsetTop - 70, behavior:'smooth'});
+});
+
+// 3) Tabs de categorías y render de productos
+const tabs = document.querySelectorAll('.tab');
+const grid = document.getElementById('productsGrid');
+
+function renderCategory(cat){
+  grid.innerHTML = '';
+  const items = PRODUCTS.filter(p=>p.cat === cat);
+  if(items.length === 0){
+    grid.innerHTML = '<div class="empty">No hay productos en esta categoría.</div>';
+    return;
+  }
+  items.forEach(p=>{
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="img-wrap"><img src="${p.img}" alt="${p.title}"></div>
+      <h3>${p.title}</h3>
+      <p class="desc">${p.desc}</p>
+      <div class="price">${fmtCOP(p.price)}</div>
+      <div style="margin-top:auto;display:flex;gap:6px">
+        <button class="btn-primary" data-id="${p.id}">VER DETALLE</button>
+        <button class="btn-secondary" data-add="${p.id}">AÑADIR</button>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function setActiveTab(el){
+  tabs.forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  renderCategory(el.dataset.cat);
+}
+
+tabs.forEach(t=> t.addEventListener('click', ()=> setActiveTab(t)));
+setActiveTab(document.querySelector('.tab.active') || tabs[0]);
+
+// 4) Modal detalle producto
+const ING_ICONS = {
+  pepperoni:'🌶️', jamon:'🍖', carne:'🥩', chorizo:'🌭', piña:'🍍',
+  mozzarella:'🧀', salsa:'🍅'
+};
+
+let mdIndex = 0;
+let mdGallery = [];
+let mdCurrentProduct = null;
+let selectedSize = null;
+
+const modalBack = document.getElementById('modalBack');
+const modalImg = document.getElementById('modalImg');
+const modalTitle = document.getElementById('modalTitle');
+const modalCrumb = document.getElementById('modalCrumb');
+const modalPrice = document.getElementById('modalPrice');
+const mdThumbs = document.getElementById('mdThumbs');
+const mdIngredients = document.getElementById('mdIngredients');
+const mdSizes = document.getElementById('mdSizes');
+const qtyInput = document.getElementById('qtyInput');
+const qtyMinus = document.getElementById('qtyMinus');
+const qtyPlus = document.getElementById('qtyPlus');
+const mdPrev = document.getElementById('mdPrev');
+const mdNext = document.getElementById('mdNext');
+const mdRelated = document.getElementById('mdRelated');
+const modalAdd = document.getElementById('modalAdd');
+const modalFav = document.getElementById('modalFav');
+
+function openDetail(product){
+  mdCurrentProduct = product;
+  modalTitle.textContent = product.title;
+  modalCrumb.textContent = product.title;
+
+  mdGallery = product.gallery && product.gallery.length ? product.gallery : [product.img];
+  mdIndex = 0;
+  renderGallery();
+
+  renderIngredients(product.ingredients || []);
+  renderSizes(product.sizes || { 'Mediana (30cm)': product.price });
+
+  qtyInput.value = 1;
+  renderRelated(product);
+
+  modalBack.style.display = 'flex';
+  modalBack.setAttribute('aria-hidden','false');
+}
+
+function renderGallery(){
+  modalImg.src = mdGallery[mdIndex];
+  mdThumbs.innerHTML = '';
+  mdGallery.forEach((src,i)=>{
+    const img = document.createElement('img');
+    img.src = src; img.dataset.i = i;
+    if(i===mdIndex) img.classList.add('active');
+    img.addEventListener('click', ()=>{ mdIndex = i; renderGallery(); });
+    mdThumbs.appendChild(img);
+  });
+}
+mdPrev.addEventListener('click', ()=>{ mdIndex = (mdIndex-1+mdGallery.length)%mdGallery.length; renderGallery(); });
+mdNext.addEventListener('click', ()=>{ mdIndex = (mdIndex+1)%mdGallery.length; renderGallery(); });
+
+function renderIngredients(list){
+  mdIngredients.innerHTML = '';
+  list.forEach(key=>{
+    const div = document.createElement('div');
+    div.className = 'ing';
+    const icon = ING_ICONS[key] || '🍕';
+    div.innerHTML = `<span>${icon}</span><span>${key.charAt(0).toUpperCase()+key.slice(1)}</span>`;
+    mdIngredients.appendChild(div);
+  });
+}
+
+function renderSizes(sizes){
+  mdSizes.innerHTML = '';
+  const labels = Object.keys(sizes);
+  if(!labels.length){
+    selectedSize = {label:'Única', price:mdCurrentProduct.price};
+    modalPrice.textContent = fmtCOP(selectedSize.price);
+    return;
+  }
+  labels.forEach((label,i)=>{
+    const btn = document.createElement('button');
+    btn.className = 'size-btn' + (i===0 ? ' active':'');
+    btn.textContent = label;
+    if(i===0) selectedSize = {label, price:sizes[label]};
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedSize = {label, price:sizes[label]};
+      modalPrice.textContent = fmtCOP(selectedSize.price);
+    });
+    mdSizes.appendChild(btn);
+  });
+  modalPrice.textContent = fmtCOP(selectedSize.price);
+}
+
+qtyMinus.addEventListener('click', ()=>{ qtyInput.value = Math.max(1, Number(qtyInput.value)-1); });
+qtyPlus.addEventListener('click', ()=>{ qtyInput.value = Number(qtyInput.value)+1; });
+
+function renderRelated(product){
+  mdRelated.innerHTML = '';
+  const others = PRODUCTS.filter(p=>p.id!==product.id && p.cat===product.cat).slice(0,6);
+  others.forEach(p=>{
+    const rc = document.createElement('div'); rc.className='related-card';
+    rc.innerHTML = `
+      <img src="${p.img}" alt="${p.title}">
+      <div class="rtitle">${p.title}</div>
+      <div class="rprice">${fmtCOP(p.price)}</div>
+      <div style="margin-top:6px"><button class="btn-primary" data-id="${p.id}">VER</button></div>
+    `;
+    mdRelated.appendChild(rc);
+  });
+}
+mdRelated.addEventListener('click', e=>{
+  const btn = e.target.closest('button[data-id]');
+  if(!btn) return;
+  const id = Number(btn.dataset.id);
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(p) openDetail(p);
+});
+
+function closeDetail(){
+  modalBack.style.display='none';
+  modalBack.setAttribute('aria-hidden','true');
+}
+modalBack.addEventListener('click', e=>{ if(e.target===modalBack) closeDetail(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeDetail(); });
+
+// Desde la grilla: "VER DETALLE"
+grid.addEventListener('click', e=>{
+  const btnDetail = e.target.closest('button[data-id]');
+  if(btnDetail){
+    const id = Number(btnDetail.dataset.id);
+    const product = PRODUCTS.find(p=>p.id===id);
+    if(product) openDetail(product);
+  }
+});
+
+// 5) Carrito
+const CART = [];
+const cartItemsEl = document.getElementById('cartItems');
+const summaryList = document.getElementById('summaryList');
+const summarySubtotal = document.getElementById('summarySubtotal');
+const summaryShipping = document.getElementById('summaryShipping');
+const summaryTotal = document.getElementById('summaryTotal');
+
+function renderCart(){
+  if(!cartItemsEl) return; // por si aún no pegaste la sección de carrito
+  cartItemsEl.innerHTML = '';
+  summaryList.innerHTML = '';
+  let subtotal = 0;
+  CART.forEach((it, idx)=>{
+    const line = document.createElement('div');
+    line.style.display='flex';line.style.justifyContent='space-between';line.style.alignItems='center';
+    line.innerHTML = `
+      <div style="flex:1">
+        <div style="font-weight:700">${it.title}</div>
+        <div style="color:var(--muted);font-size:13px">${it.sizeLabel} · x${it.qty}</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-weight:900;color:var(--accent)">${fmtCOP(it.price*it.qty)}</div>
+        <div style="margin-top:6px"><button class="btn-secondary" data-action="remove" data-idx="${idx}">Eliminar</button></div>
+      </div>`;
+    cartItemsEl.appendChild(line);
+
+    const sline = document.createElement('div');
+    sline.style.display='flex';sline.style.justifyContent='space-between';
+    sline.innerHTML = `<div>${it.title} <small style="color:var(--muted)">${it.qty}x</small></div><div style="font-weight:900">${fmtCOP(it.price*it.qty)}</div>`;
+    summaryList.appendChild(sline);
+
+    subtotal += it.price * it.qty;
+  });
+
+  const shipping = subtotal > 0 ? 5000 : 0;
+  summarySubtotal.textContent = fmtCOP(subtotal);
+  summaryShipping.textContent = fmtCOP(shipping);
+  summaryTotal.textContent = fmtCOP(subtotal+shipping);
+}
+if(document.getElementById('cartItems')) renderCart();
+
+// Eliminar item en carrito
+if(cartItemsEl){
+  cartItemsEl.addEventListener('click', e=>{
+    const btn = e.target.closest('button[data-action="remove"]');
+    if(!btn) return;
+    const idx = Number(btn.dataset.idx);
+    CART.splice(idx,1);
+    renderCart();
+  });
+}
+
+// Botón AÑADIR en cards
+grid.addEventListener('click', e=>{
+  const addBtn = e.target.closest('button[data-add]');
+  if(!addBtn) return;
+  const id = Number(addBtn.dataset.add);
+  const product = PRODUCTS.find(p=>p.id===id);
+  if(!product) return;
+  const existing = CART.find(i=>i.id===id && i.sizeLabel==='Mediana');
+  if(existing) existing.qty++;
+  else CART.push({id, title:product.title, price:product.price, qty:1, sizeLabel:'Mediana'});
+  renderCart();
+});
+
+// AGREGAR AL CARRITO desde modal
+modalAdd.addEventListener('click', ()=>{
+  const qty = Number(qtyInput.value) || 1;
+  const size = selectedSize ? selectedSize.label : 'Mediana';
+  const price = selectedSize ? selectedSize.price : mdCurrentProduct.price;
+  const existing = CART.find(i=>i.id===mdCurrentProduct.id && i.sizeLabel===size);
+  if(existing) existing.qty += qty;
+  else CART.push({id:mdCurrentProduct.id, title:mdCurrentProduct.title, price, qty, sizeLabel:size});
+  renderCart();
+  alert('Producto agregado al carrito.');
+  closeDetail();
+});
+
+modalFav.addEventListener('click', ()=>{
+  alert(`Favorito: ${mdCurrentProduct.title} (demo).`);
+});
+
+// 8) Contacto y mapa
+document.getElementById('contactFormFull').addEventListener('submit', e=>{
+  e.preventDefault();
+  alert('Mensaje enviado (demo). Nos pondremos en contacto pronto.');
+  e.target.reset();
+});
+
+document.getElementById('openMapBtn').addEventListener('click', ()=>{
+  const mapBox = document.getElementById('mapPlaceholder');
+  mapBox.innerHTML = '<iframe src="https://www.google.com/maps?q=Soacha&output=embed" style="width:100%;height:100%;border:0;border-radius:8px"></iframe>';
+});
+
+  </script>
+</body>
+</html>
